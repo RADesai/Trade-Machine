@@ -22,24 +22,24 @@ module.exports = [
   },
   {
     "teamId": 1610612738,
-    "name": "Isaiah Thomas",
+    "name": "Amir Johnson",
     "teamName": "Boston Celtics",
-    "salary": 6261000,
+    "salary": 12000000,
+    "position": "F"
+  },
+  {
+    "teamId": 1610612751,
+    "name": "Brook Lopez",
+    "teamName": "Brooklyn Nets",
+    "salary": 19690000,
+    "position": "C"
+  },
+  {
+    "teamId": 1610612751,
+    "name": "Jeremy Lin",
+    "teamName": "Brooklyn Nets",
+    "salary": 11483000,
     "position": "G"
-  },
-  {
-    "teamId": 1610612751,
-    "name": "Brook Lopez",
-    "teamName": "Brooklyn Nets",
-    "salary": 19690000,
-    "position": "C"
-  },
-  {
-    "teamId": 1610612751,
-    "name": "Brook Lopez",
-    "teamName": "Brooklyn Nets",
-    "salary": 19690000,
-    "position": "C"
   },
   {
     "teamId": 1610612766,
@@ -106,9 +106,9 @@ module.exports = [
   },
   {
     "teamId": 1610612743,
-    "name": "Wilson Chandler",
+    "name": "Danilo Gallinari",
     "teamName": "Denver Nuggets",
-    "salary": 7400000,
+    "salary": 15050000,
     "position": "F"
   },
   {
@@ -162,9 +162,9 @@ module.exports = [
   },
   {
     "teamId": 1610612754,
-    "name": "Paul George",
+    "name": "Thaddeus Young",
     "teamName": "Indiana Pacers",
-    "salary": 19510000,
+    "salary": 14153000,
     "position": "F"
   },
   {
@@ -246,10 +246,10 @@ module.exports = [
   },
   {
     "teamId": 1610612750,
-    "name": "Karl Anthony Towns",
+    "name": "Ricky Rubio",
     "teamName": "Minnesota Timberwolves",
-    "salary": 5704000,
-    "position": "C"
+    "salary": 13055000,
+    "position": "G"
   },
   {
     "teamId": 1610612740,
@@ -316,9 +316,9 @@ module.exports = [
   },
   {
     "teamId": 1610612755,
-    "name": "Joel Embiid",
+    "name": "Tiago Splitter",
     "teamName": "Philadelphia 76ers",
-    "salary": 4826000,
+    "salary": 8550000,
     "position": "C"
   },
   {
@@ -330,9 +330,9 @@ module.exports = [
   },
   {
     "teamId": 1610612756,
-    "name": "Devin Booker",
+    "name": "Eric Bledsoe",
     "teamName": "Phoenix Suns",
-    "salary": 2224000,
+    "salary": 14000000,
     "position": "G"
   },
   {
@@ -358,10 +358,10 @@ module.exports = [
   },
   {
     "teamId": 1610612758,
-    "name": "Rudy Gay",
+    "name": "Kosta Koufos",
     "teamName": "Sacramento Kings",
-    "salary": 13330000,
-    "position": "F"
+    "salary": 8046000,
+    "position": "C"
   },
   {
     "teamId": 1610612759,
@@ -386,10 +386,10 @@ module.exports = [
   },
   {
     "teamId": 1610612761,
-    "name": "DeMar DeRozan",
+    "name": "Serge Ibaka",
     "teamName": "Toronto Raptors",
-    "salary": 26540000,
-    "position": "G"
+    "salary": 12250000,
+    "position": "F"
   },
   {
     "teamId": 1610612762,
@@ -400,9 +400,9 @@ module.exports = [
   },
   {
     "teamId": 1610612762,
-    "name": "Gordon Hayward",
+    "name": "Joe Johnson",
     "teamName": "Utah Jazz",
-    "salary": 15410000,
+    "salary": 11000000,
     "position": "F"
   },
   {

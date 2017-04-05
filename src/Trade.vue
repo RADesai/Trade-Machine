@@ -1,11 +1,32 @@
 <template>
   <div class="container">
+
     <div class="row">
       <div class="col-md-3">
         <br><h3>Select Players to Trade</h3><br>
       </div>
+
       <div class="col-md-9 text-center">
-        <br><h3>Select Players to Trade</h3><br>
+
+        <div class="col-md-4">
+          Team 1
+          <br>{{ teamOneTrades.salary }}
+        </div>
+
+        <div class="col-md-4">
+          {{ tradeChecker() }}
+          <div v-if="valid">
+            Good Trade
+          </div>
+          <div v-if="!valid">
+            Bad Trade
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          Team 2
+          <br>{{ teamTwoTrades.salary }}
+        </div>
       </div>
     </div>
 
@@ -36,20 +57,33 @@
     </div>
 
     <div class="row">
-      <div class="col-md-8 col-md-offset-2 evaluation">
         <div class="col-md-6">
           <h3>{{ teamOne }} Receive:</h3>
           <span v-for="(player, i) in teamTwoTrades.players" class="traded team-1">
-            {{ player.name }}<br>
+            <div class="col-md-6">
+              <h3>{{ player.name }} - {{ player.position }}</h3><hr class="orange">
+            </div>
+            <div class="col-md-6">
+              <div class="stats">
+                <h3>PPG: 22.5 APG: 6.6</h3><hr class="blend">
+              </div>
+            </div>
           </span>
         </div>
+
         <div class="col-md-6">
           <h3>{{ teamTwo }} Receive:</h3>
           <span v-for="(player, i) in teamOneTrades.players" class="traded team-2">
-            {{ player.name }}<br>
+            <div class="col-md-6">
+              <h3>{{ player.name }} - {{ player.position }}</h3><hr class="orange">
+            </div>
+            <div class="col-md-6">
+              <div class="stats">
+                <h3>PPG: 22.5 APG: 6.6</h3><hr class="blend">
+              </div>
+            </div>
           </span>
         </div>
-      </div>
     </div>
 
 
@@ -84,7 +118,8 @@ import players from './data/players'
         teamTwoTrades: {
           players: [],
           salary: 0
-        }
+        },
+        valid: null
       }
     },
     computed: {
@@ -101,15 +136,7 @@ import players from './data/players'
         });
       }
     },
-    mounted() {
-      this.$on('team1', function (team) {
-        console.log('Team:', team);
-      });
-      console.log('props:', this.props);
-      console.log('params:', this.params);
-      console.log('team1:', this.team1);
-      console.log('team2:', this.team2);
-    },
+    mounted() {},
     methods: {
       beforeEnter: function (el) {
         el.style.opacity = 0
@@ -150,6 +177,7 @@ import players from './data/players'
         return `$${niceNum.reverse().join('')}`;
       },
       tradePlayer: function(player) {
+        console.log('Trading:', player.name);
         if (player.teamName === this.teamOne) {
           this.teamOneTrades.players.push(player);
           this.teamOneTrades.salary += player.salary;
@@ -157,17 +185,45 @@ import players from './data/players'
           this.teamTwoTrades.players.push(player)
           this.teamTwoTrades.salary += player.salary;
         }
+        // console.log('Team 1:', this.teamOneTrades.salary);
+        // console.log('Team 2:', this.teamTwoTrades.salary);
       },
       tradeChecker: function() {
-
+        let low = Math.min(this.teamOneTrades.salary, this.teamTwoTrades.salary);
+        let hi = Math.max(this.teamOneTrades.salary, this.teamTwoTrades.salary);
+        console.log('hi, low:', hi, low);
+        console.log("% Diff:", (hi / low) * 100);
+        low * 1.5 >= hi ? this.valid = true : this.valid = false;
+        // this.valid = low * 1.5 >= hi;
       }
     }
   }
 </script>
 
 <style>
-.traded {
+.math {
+  border: 1px solid #ed8d1f;
+  border-radius: 2px 2px 4px 4px;
+}
 
+.stats {
+  color: #000;
+  transition: .3s ease-out;
+  border-color: #000;
+}
+.stats .blend {
+  border-color: #000;
+  transition: .3s ease-out;
+}
+
+.traded:hover {
+  color: #ed8d1f;
+}
+.traded:hover .stats {
+  color: #f1f4ff;
+}
+.traded:hover .stats .blend {
+  border-color: #ed8d1f;
 }
 .team-1 {
   border-top: 2px solid #00A2A5;
