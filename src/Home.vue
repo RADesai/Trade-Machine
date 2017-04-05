@@ -110,7 +110,7 @@
 </template>
 
 <script>
-import teams from './teams';
+import teams from './data/teams';
 import Trade from './Trade.vue';
   export default {
     name: 'app',

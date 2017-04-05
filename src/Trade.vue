@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import players from './players'
+import players from './data/players'
   export default {
     name: 'app',
     components: {},
