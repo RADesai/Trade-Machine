@@ -23,8 +23,6 @@
       </div>
     </div>
 
-
-
     <div v-if="!trading" class="row">
       <div class="col-md-6">
         <transition-group
@@ -65,8 +63,6 @@
         </transition-group>
       </div>
     </div>
-
-
     <hr v-if="!trading" class="orange">
 
     <Trade v-if="trading" :teamOne="team1" :teamTwo="team2"></Trade>
@@ -74,14 +70,14 @@
 
     <div v-if="teamCheck() && !trading" class="row text-center">
       <div class="col-md-4 col-md-offset-4">
-        <!-- <router-link :to="{ path: '/trade', props: { team1: team1, team2: team2 } }"> -->
+        <!-- <router-link :to="{ path: '/trade', params: { ${team1}${team2} } }"> -->
         <div @click="startTrade()" class="well well-sm link">
           <span class="glyphicon glyphicon-menu-right"></span>
         </div>
         <!-- </router-link> -->
       </div>
     </div>
-    
+
     <div class="row">
       <div v-if="trading" @click="trading = false" class="col-md-4 col-md-offset-1 text-center">
         <div class="well well-sm link">
@@ -96,7 +92,6 @@
       <div>Icons made by <a href="http://www.flaticon.com/authors/darius-dan" title="Darius Dan">Darius Dan</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
       <div>Icons made by <a href="http://www.flaticon.com/authors/madebyoliver" title="Madebyoliver">Madebyoliver</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
     </div> -->
-
   </div>
 </template>
 

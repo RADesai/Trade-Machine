@@ -1,44 +1,36 @@
 <template>
   <div class="container">
-
     <div class="row text-center">
-      <!-- <div class="col-md-3">
-        <br><h3>Select Players to Trade</h3><br>
-      </div> -->
+      <div v-if="teamOneTrades.salary.net >= 0" class="col-md-4 gain">
+        {{ teamOne }}
+        <br>+{{ beautify(teamOneTrades.salary.net) }}
+      </div>
+      <div v-if="teamOneTrades.salary.net < 0" class="col-md-4 loss">
+        {{ teamOne }}
+        <br>-{{ beautify(Math.abs(teamOneTrades.salary.net)) }}
+      </div>
 
-      <!-- <div class="col-md-9 text-center"> -->
-
-        <div v-if="teamOneTrades.salary.net >= 0" class="col-md-4 gain">
-          {{ teamOne }}
-          <br>+{{ beautify(teamOneTrades.salary.net) }}
-        </div>
-        <div v-if="teamOneTrades.salary.net < 0" class="col-md-4 loss">
-          {{ teamOne }}
-          <br>-{{ beautify(Math.abs(teamOneTrades.salary.net)) }}
-        </div>
-
-        <div class="col-md-4">
-          {{ tradeChecker() }}
-          <div v-if="valid" class="valid">
-            Make Trade<br>
-            <div class="well well-sm link">
-              <span class="glyphicon glyphicon-resize-horizontal"></span>
-            </div>
-          </div>
-          <div v-if="!valid" class="invalid">
-            Bad Trade
+      <div class="col-md-4">
+        {{ tradeChecker() }}
+        <div v-if="valid" class="valid">
+          Make Trade<br>
+          <div class="well well-sm confirm">
+            <span class="glyphicon glyphicon-transfer"></span>
           </div>
         </div>
+        <div v-if="!valid" class="invalid">
+          Bad Trade
+        </div>
+      </div>
 
-        <div v-if="teamTwoTrades.salary.net >= 0" class="col-md-4 gain">
-          {{ teamTwo }}
-          <br>+{{ beautify(teamTwoTrades.salary.net) }}
-        </div>
-        <div v-if="teamTwoTrades.salary.net < 0" class="col-md-4 loss">
-          {{ teamTwo }}
-          <br>-{{ beautify(Math.abs(teamTwoTrades.salary.net)) }}
-        </div>
-      <!-- </div> -->
+      <div v-if="teamTwoTrades.salary.net >= 0" class="col-md-4 gain">
+        {{ teamTwo }}
+        <br>+{{ beautify(teamTwoTrades.salary.net) }}
+      </div>
+      <div v-if="teamTwoTrades.salary.net < 0" class="col-md-4 loss">
+        {{ teamTwo }}
+        <br>-{{ beautify(Math.abs(teamTwoTrades.salary.net)) }}
+      </div>
     </div>
 
     <div class="row text-center top">
@@ -68,44 +60,48 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6">
-          <h3>{{ teamOne }} Receive:</h3>
-          <span v-for="(player, i) in teamTwoTrades.players" class="traded team-1">
-            <div class="col-md-6">
-              <h3>{{ player.name }} - {{ player.position }}</h3><hr class="orange">
-            </div>
-            <div class="col-md-6">
-              <div class="stats">
-                <h3>PPG: 22.5 APG: 6.6</h3><hr class="blend">
+      <div class="col-md-6">
+        <h3>{{ teamOne }} Receive:</h3>
+        <ul class="list-group">
+          <li v-for="(player, i) in teamTwoTrades.players" class="list-group-item traded team-1">
+            <div class="row">
+              <div class="col-md-6">
+                <span class="name">{{ player.name }} - {{ player.position }}</span>
+              </div>
+              <div class="col-md-6">
+                <span class="stats">PPG: 20.6 APG: 3.8 RPG: 8.2<br>SPG: 0.5 BPG: 1.3 FG%: 54.2</span>
               </div>
             </div>
-          </span>
-        </div>
-
-        <div class="col-md-6">
-          <h3>{{ teamTwo }} Receive:</h3>
-          <span v-for="(player, i) in teamOneTrades.players" class="row traded team-2">
-            <div class="col-md-6">
-              <h3>{{ player.name }} - {{ player.position }}</h3><hr class="orange">
+          </li>
+        </ul>
+        <!-- <span v-for="(player, i) in teamTwoTrades.players" class="traded team-1">
+          <div class="col-md-6">
+            <h3>{{ player.name }} - {{ player.position }}</h3><hr class="orange">
+          </div>
+          <div class="col-md-6">
+            <div class="stats">
+              <h4>PPG: 22.5 APG: 6.6 RPG: 4.5 <br> <br>SPG: 1.8 BPG: 0.9 FG%: 51.7</h4>
             </div>
-            <div class="col-md-6">
-              <div class="stats">
-                <h4>PPG: 22.5 APG: 6.6</h4><hr class="blend">
-              </div>
-            </div>
-          </span>
-        </div>
-    </div>
-
-
-    <!-- <div class="row text-center">
-      <div class="col-md-4 col-md-offset-2">
-        <div class="well well-sm link">
-          <span class="glyphicon glyphicon-menu-right"></span>
-        </div>
+          </div>
+        </span> -->
       </div>
-    </div> -->
 
+      <div class="col-md-6">
+        <h3>{{ teamTwo }} Receive:</h3>
+        <ul class="list-group">
+          <li v-for="(player, i) in teamOneTrades.players" class="list-group-item traded team-2">
+            <div class="row">
+              <div class="col-md-6">
+                <span class="name">{{ player.name }} - {{ player.position }}</span>
+              </div>
+              <div class="col-md-6">
+                <span class="stats">PPG: 22.5 APG: 6.6 RPG: 4.5<br>SPG: 1.8 BPG: 0.9 FG%: 51.7</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -229,11 +225,12 @@ import players from './data/players'
   border-radius: 2px 2px 4px 4px;
 }
 
-.glyphicon-resize-horizontal {
+.glyphicon-transfer {
   color: #63D297;
   transition: .3s ease-out;
 }
-.glyphicon-resize-horizontal:hover {
+.glyphicon-transfer:hover {
+  /*color: #000;*/
   transform: rotateY(360deg);
 }
 
@@ -244,6 +241,14 @@ import players from './data/players'
   color: #EE3017;
 }
 
+.well.confirm:hover {
+  background-color: #63D297;
+  cursor: pointer;
+  border: 1px solid #63D297;
+}
+.well.confirm:hover .glyphicon-transfer {
+  color: #000;
+}
 .valid {
   color: #000;
   transition: .3s ease-out;
@@ -255,7 +260,7 @@ import players from './data/players'
 
 }
 .stats {
-  /*color: #000;*/
+  color: #000;
   transition: .3s ease-out;
   /*border-color: #000;*/
 }
@@ -264,6 +269,9 @@ import players from './data/players'
   transition: .3s ease-out;
 }
 
+.traded {
+  background-color: transparent;
+}
 .traded:hover {
   color: #ed8d1f;
 }
