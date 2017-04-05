@@ -418,5 +418,185 @@ module.exports = [
     "teamName": "Washington Wizards",
     "salary": 22116000,
     "position": "G"
+  },
+  {
+    "teamName": "Washington Wizards",
+    "name": "Jacqueline Carroll",
+    "salary": 4025524,
+    "position": "G"
+  },
+  {
+    "teamName": "Utah Jazz",
+    "name": "Stephanie Hunter",
+    "salary": 2865435,
+    "position": "G"
+  },
+  {
+    "teamName": "Toronto Raptors",
+    "name": "Rose Vasquez",
+    "salary": 6364212,
+    "position": "G"
+  },
+  {
+    "teamName": "San Antonio Spurs",
+    "name": "Dennis Flores",
+    "salary": 7230179,
+    "position": "G"
+  },
+  {
+    "teamName": "Sacramento Kings",
+    "name": "Anna Greene",
+    "salary": 4932646,
+    "position": "G"
+  },
+  {
+    "teamName": "Portland Trail Blazers",
+    "name": "Ashley Willis",
+    "salary": 6734890,
+    "position": "G"
+  },
+  {
+    "teamName": "Phoenix Suns",
+    "name": "Joyce Nichols",
+    "salary": 3548287,
+    "position": "G"
+  },
+  {
+    "teamName": "Philadelphia 76ers",
+    "name": "Wanda Mccoy",
+    "salary": 7192949,
+    "position": "G"
+  },
+  {
+    "teamName": "Orlando Magic",
+    "name": "Harry Hart",
+    "salary": 7573445,
+    "position": "G"
+  },
+  {
+    "teamName": "Oklahoma City Thunder",
+    "name": "Shirley Schmidt",
+    "salary": 7736675,
+    "position": "G"
+  },
+  {
+    "teamName": "New York Knicks",
+    "name": "Brandon Kelley",
+    "salary": 7349568,
+    "position": "G"
+  },
+  {
+    "teamName": "New Orleans Pelicans",
+    "name": "Doris Brown",
+    "salary": 5966748,
+    "position": "G"
+  },
+  {
+    "teamName": "Minnesota Timberwolves",
+    "name": "Charles Lane",
+    "salary": 6408443,
+    "position": "G"
+  },
+  {
+    "teamName": "Milwaukee Bucks",
+    "name": "Betty Young",
+    "salary": 8801768,
+    "position": "G"
+  },
+  {
+    "teamName": "Miami Heat",
+    "name": "Eugene Wallace",
+    "salary": 6417756,
+    "position": "G"
+  },
+  {
+    "teamName": "Memphis Grizzlies",
+    "name": "Denise Peterson",
+    "salary": 3195825,
+    "position": "G"
+  },
+  {
+    "teamName": "Los Angeles Lakers",
+    "name": "Jason Spencer",
+    "salary": 5040446,
+    "position": "G"
+  },
+  {
+    "teamName": "Los Angeles Clippers",
+    "name": "Robin Kim",
+    "salary": 4286476,
+    "position": "G"
+  },
+  {
+    "teamName": "Indiana Pacers",
+    "name": "Edward Woods",
+    "salary": 6580135,
+    "position": "G"
+  },
+  {
+    "teamName": "Houston Rockets",
+    "name": "Harry Jackson",
+    "salary": 6284734,
+    "position": "F"
+  },
+  {
+    "teamName": "Golden State Warriors",
+    "name": "Keith Garza",
+    "salary": 9617027,
+    "position": "F"
+  },
+  {
+    "teamName": "Detroit Pistons",
+    "name": "Catherine Bowman",
+    "salary": 6614458,
+    "position": "F"
+  },
+  {
+    "teamName": "Denver Nuggets",
+    "name": "Jesse Nguyen",
+    "salary": 3039872,
+    "position": "F"
+  },
+  {
+    "teamName": "Dallas Mavericks",
+    "name": "Ryan Nichols",
+    "salary": 6249833,
+    "position": "F"
+  },
+  {
+    "teamName": "Cleveland Cavaliers",
+    "name": "Anna Sims",
+    "salary": 4615547,
+    "position": "F"
+  },
+  {
+    "teamName": "Chicago Bulls",
+    "name": "Sharon Price",
+    "salary": 2912487,
+    "position": "F"
+  },
+  {
+    "teamName": "Charlotte Hornets",
+    "name": "Willie Cole",
+    "salary": 6288192,
+    "position": "F"
+  },
+  {
+    "teamName": "Brooklyn Nets",
+    "name": "Juan Meyer",
+    "salary": 9345089,
+    "position": "F"
+  },
+  {
+    "teamName": "Boston Celtics",
+    "name": "Walter Henry",
+    "salary": 5665074,
+    "position": "F"
+  },
+  {
+    "teamName": "Atlanta Hawks",
+    "name": "Betty Evans",
+    "salary": 2613119,
+    "position": "F"
   }
 ]

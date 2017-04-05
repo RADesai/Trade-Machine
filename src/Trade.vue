@@ -1,33 +1,44 @@
 <template>
   <div class="container">
 
-    <div class="row">
-      <div class="col-md-3">
+    <div class="row text-center">
+      <!-- <div class="col-md-3">
         <br><h3>Select Players to Trade</h3><br>
-      </div>
+      </div> -->
 
-      <div class="col-md-9 text-center">
+      <!-- <div class="col-md-9 text-center"> -->
 
-        <div class="col-md-4">
-          Team 1
-          <br>{{ teamOneTrades.salary }}
+        <div v-if="teamOneTrades.salary.net >= 0" class="col-md-4 gain">
+          {{ teamOne }}
+          <br>+{{ beautify(teamOneTrades.salary.net) }}
+        </div>
+        <div v-if="teamOneTrades.salary.net < 0" class="col-md-4 loss">
+          {{ teamOne }}
+          <br>-{{ beautify(Math.abs(teamOneTrades.salary.net)) }}
         </div>
 
         <div class="col-md-4">
           {{ tradeChecker() }}
-          <div v-if="valid">
-            Good Trade
+          <div v-if="valid" class="valid">
+            Make Trade<br>
+            <div class="well well-sm link">
+              <span class="glyphicon glyphicon-resize-horizontal"></span>
+            </div>
           </div>
-          <div v-if="!valid">
+          <div v-if="!valid" class="invalid">
             Bad Trade
           </div>
         </div>
 
-        <div class="col-md-4">
-          Team 2
-          <br>{{ teamTwoTrades.salary }}
+        <div v-if="teamTwoTrades.salary.net >= 0" class="col-md-4 gain">
+          {{ teamTwo }}
+          <br>+{{ beautify(teamTwoTrades.salary.net) }}
         </div>
-      </div>
+        <div v-if="teamTwoTrades.salary.net < 0" class="col-md-4 loss">
+          {{ teamTwo }}
+          <br>-{{ beautify(Math.abs(teamTwoTrades.salary.net)) }}
+        </div>
+      <!-- </div> -->
     </div>
 
     <div class="row text-center top">
@@ -73,13 +84,13 @@
 
         <div class="col-md-6">
           <h3>{{ teamTwo }} Receive:</h3>
-          <span v-for="(player, i) in teamOneTrades.players" class="traded team-2">
+          <span v-for="(player, i) in teamOneTrades.players" class="row traded team-2">
             <div class="col-md-6">
               <h3>{{ player.name }} - {{ player.position }}</h3><hr class="orange">
             </div>
             <div class="col-md-6">
               <div class="stats">
-                <h3>PPG: 22.5 APG: 6.6</h3><hr class="blend">
+                <h4>PPG: 22.5 APG: 6.6</h4><hr class="blend">
               </div>
             </div>
           </span>
@@ -113,11 +124,17 @@ import players from './data/players'
         players2: players,
         teamOneTrades: {
           players: [],
-          salary: 0
+          salary: {
+            trading: 0,
+            net: 0
+          }
         },
         teamTwoTrades: {
           players: [],
-          salary: 0
+          salary: {
+            trading: 0,
+            net: 0
+          }
         },
         valid: null
       }
@@ -180,21 +197,27 @@ import players from './data/players'
         console.log('Trading:', player.name);
         if (player.teamName === this.teamOne) {
           this.teamOneTrades.players.push(player);
-          this.teamOneTrades.salary += player.salary;
+          this.teamOneTrades.salary.trading += player.salary;
+          this.teamOneTrades.salary.net += player.salary;
+          this.teamTwoTrades.salary.net -= player.salary;
         } else {
           this.teamTwoTrades.players.push(player)
-          this.teamTwoTrades.salary += player.salary;
+          this.teamTwoTrades.salary.trading += player.salary;
+          this.teamTwoTrades.salary.net += player.salary;
+          this.teamOneTrades.salary.net -= player.salary;
         }
-        // console.log('Team 1:', this.teamOneTrades.salary);
-        // console.log('Team 2:', this.teamTwoTrades.salary);
       },
       tradeChecker: function() {
-        let low = Math.min(this.teamOneTrades.salary, this.teamTwoTrades.salary);
-        let hi = Math.max(this.teamOneTrades.salary, this.teamTwoTrades.salary);
-        console.log('hi, low:', hi, low);
-        console.log("% Diff:", (hi / low) * 100);
-        low * 1.5 >= hi ? this.valid = true : this.valid = false;
-        // this.valid = low * 1.5 >= hi;
+        let low = Math.min(this.teamOneTrades.salary.trading, this.teamTwoTrades.salary.trading);
+        let high = Math.max(this.teamOneTrades.salary.trading, this.teamTwoTrades.salary.trading);
+        console.log('high, low:', high, low);
+        console.log("% Diff:", (high / low) * 100);
+        if (low === 0 || high === 0) {
+          this.valid = false;
+        } else {
+          low * 1.5 >= high ? this.valid = true : this.valid = false;
+          // this.valid = low * 1.5 >= high;
+        }
       }
     }
   }
@@ -206,10 +229,35 @@ import players from './data/players'
   border-radius: 2px 2px 4px 4px;
 }
 
-.stats {
+.glyphicon-resize-horizontal {
+  color: #63D297;
+  transition: .3s ease-out;
+}
+.glyphicon-resize-horizontal:hover {
+  transform: rotateY(360deg);
+}
+
+.gain {
+  color: #63D297;
+}
+.loss {
+  color: #EE3017;
+}
+
+.valid {
   color: #000;
   transition: .3s ease-out;
-  border-color: #000;
+}
+.valid:hover {
+  color: #63d297;
+}
+.invalid {
+
+}
+.stats {
+  /*color: #000;*/
+  transition: .3s ease-out;
+  /*border-color: #000;*/
 }
 .stats .blend {
   border-color: #000;
@@ -220,7 +268,7 @@ import players from './data/players'
   color: #ed8d1f;
 }
 .traded:hover .stats {
-  color: #f1f4ff;
+  color: #ed8d1f;
 }
 .traded:hover .stats .blend {
   border-color: #ed8d1f;
@@ -232,5 +280,9 @@ import players from './data/players'
 .team-2 {
   border-top: 2px solid #ef586b;
   transition: .3s ease-out;
+}
+.team-2:hover {
+  /*box-shadow: 0px 2px 4px #00a2a5;*/
+  color: #ef586b;
 }
 </style>

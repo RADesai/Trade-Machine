@@ -66,31 +66,22 @@
       </div>
     </div>
 
-    <div v-if="teamCheck() && !trading" class="row text-center">
-      <!-- <div class="col-md-4 col-md-offset-1">
-        <div class="well well-sm link">
-          <span class="glyphicon glyphicon-menu-left"></span>
-        </div>
-      </div>
-      <div class="col-md-4 col-md-offset-2">
-        <div class="well well-sm link">
-          <span class="glyphicon glyphicon-menu-right"></span>
-        </div>
-      </div> -->
-      <div class="col-md-4 col-md-offset-4">
-        <!-- <router-link :to="{ path: '/trade', props: { team1: team1, team2: team2 } }"> -->
-          <div @click="startTrade()" class="well well-sm link">
-            <span class="glyphicon glyphicon-menu-right"></span>
-          </div>
-        <!-- </router-link> -->
-      </div>
-    </div>
 
     <hr v-if="!trading" class="orange">
 
     <Trade v-if="trading" :teamOne="team1" :teamTwo="team2"></Trade>
     <hr class="orange">
 
+    <div v-if="teamCheck() && !trading" class="row text-center">
+      <div class="col-md-4 col-md-offset-4">
+        <!-- <router-link :to="{ path: '/trade', props: { team1: team1, team2: team2 } }"> -->
+        <div @click="startTrade()" class="well well-sm link">
+          <span class="glyphicon glyphicon-menu-right"></span>
+        </div>
+        <!-- </router-link> -->
+      </div>
+    </div>
+    
     <div class="row">
       <div v-if="trading" @click="trading = false" class="col-md-4 col-md-offset-1 text-center">
         <div class="well well-sm link">
