@@ -127,6 +127,7 @@ import players from './data/players'
             net: 0
           }
         },
+        disabled: [],
         valid: null
       }
     },
@@ -186,17 +187,20 @@ import players from './data/players'
       },
       tradePlayer: function(player) {
         console.log('Trading:', player.name);
-        if (player.teamName === this.teamOne) {
+        if (player.teamName === this.teamOne && this.disabled.indexOf(player.name) === -1) {
           this.teamOneTrades.players.push(player);
+          this.disabled.push(player.name);
           this.teamOneTrades.salary.trading += player.salary;
           this.teamOneTrades.salary.net += player.salary;
           this.teamTwoTrades.salary.net -= player.salary;
-        } else {
+        } else if (player.teamName === this.teamTwo && this.disabled.indexOf(player.name) === -1) {
           this.teamTwoTrades.players.push(player)
+          this.disabled.push(player.name);
           this.teamTwoTrades.salary.trading += player.salary;
           this.teamTwoTrades.salary.net += player.salary;
           this.teamOneTrades.salary.net -= player.salary;
         }
+        console.log('Already on a team:', player.name);
       },
       tradeChecker: function() {
         let low = Math.min(this.teamOneTrades.salary.trading, this.teamTwoTrades.salary.trading);
