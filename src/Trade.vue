@@ -10,16 +10,21 @@
         <br>-{{ beautify(Math.abs(teamOneTrades.salary.net)) }}
       </div>
 
-      <div class="col-md-4">
+      <div v-if="!inTrade()" class="col-md-4">
+        <h2>Select Players to Trade</h2>
+      </div>
+
+      <div v-if="inTrade()" class="col-md-4">
         {{ tradeChecker() }}
         <div v-if="valid" class="valid">
-          Make Trade<br>
           <div class="well well-sm confirm">
             <span class="glyphicon glyphicon-transfer"></span>
           </div>
         </div>
         <div v-if="!valid" class="invalid">
-          Bad Trade
+          <div class="well well-sm loss">
+            {{ message }}
+          </div>
         </div>
       </div>
 
@@ -43,7 +48,7 @@
           <ul class="list-group">
             <li @click="tradePlayer(player)" v-for="(player, index) in team1Players" class="list-group-item player">
               {{ player.name }} - {{ player.position }}<br>
-              {{ beautify(player.salary) }}
+              {{ beautify(player.salary) }} - 1 Year
             </li>
           </ul>
         </div>
@@ -53,7 +58,7 @@
           <ul class="list-group">
             <li @click="tradePlayer(player)" v-for="(player, index) in team2Players" class="list-group-item player">
               {{ player.name }} - {{ player.position }}<br>
-              {{ beautify(player.salary) }}
+              {{ beautify(player.salary) }} - 2 Years
             </li>
           </ul>
         </div>
@@ -70,10 +75,10 @@
         <ul class="list-group">
           <li v-for="(player, i) in teamTwoTrades.players" class="list-group-item traded team-1">
             <div class="row">
-              <div class="col-md-5 name">
+              <div class="col-md-6 name">
                 <h4>{{ player.name }} - {{ player.position }}</h4>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-5">
                 <span class="stats">PPG: 20.6 APG: 3.8 RPG: 8.2<br>SPG: 0.5 BPG: 1.3 FG%: 54.2</span>
               </div>
               <div class="col-md-1">
@@ -89,10 +94,10 @@
         <ul class="list-group">
           <li v-for="(player, i) in teamOneTrades.players" class="list-group-item traded team-2">
             <div class="row">
-              <div class="col-md-5 name">
+              <div class="col-md-6 name">
                 <h4>{{ player.name }} - {{ player.position }}</h4>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-5">
                 <span class="stats">PPG: 22.5 APG: 6.6 RPG: 4.5<br>SPG: 1.8 BPG: 0.9 FG%: 51.7</span>
               </div>
               <div class="col-md-1">
@@ -134,7 +139,8 @@ import players from './data/players'
           }
         },
         disabled: [],
-        valid: null
+        valid: null,
+        message: 'Invalid Trade'
       }
     },
     computed: {
@@ -176,6 +182,9 @@ import players from './data/players'
             { complete: done }
           )
         }, delay)
+      },
+      inTrade: function() {
+        return this.teamOneTrades.players.length !== 0 && this.teamTwoTrades.players.length !== 0
       },
       beautify(salary) {
         let num = salary.toString().split('');
@@ -273,7 +282,18 @@ import players from './data/players'
 .loss {
   color: #EE3017;
 }
-
+.well.loss {
+  border-color: #ed8d1f;
+  cursor: wait;
+}
+.well.loss:hover {
+  border-color: #EE3017;
+  background-color: transparent;
+  cursor: not-allowed;
+}
+.well.confirm {
+  border: 1px solid #63D297;
+}
 .well.confirm:hover {
   background-color: #63D297;
   cursor: pointer;
@@ -296,6 +316,9 @@ import players from './data/players'
   border-left: 2px solid #f1f4ff;
   border-right: 2px solid #f1f4ff;
 }
+.traded.team-1, .traded.team-2 {
+  border-radius: 0px;
+}
 .traded:hover {
   border-left: 2px solid #ed8d1f;
   border-right: 2px solid #ed8d1f;
@@ -317,10 +340,12 @@ import players from './data/players'
   transform: translateX(3px);
 }
 .team-1 {
+  border-radius: 10px 0px 0px 0px;
   border-top: 2px solid #00A2A5;
   transition: .3s ease-out;
 }
 .team-2 {
+  border-radius: 0px 10px 0px 0px;
   border-top: 2px solid #ef586b;
   transition: .3s ease-out;
 }

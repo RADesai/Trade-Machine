@@ -9,11 +9,11 @@
 
 
     <div v-if="!trading" class="row text-center">
-      <div class="col-md-4 navigation">
+      <div class="col-md-4 col-md-offset-2 navigation">
         <h2 v-if="!teamCheck()">Select Participating Teams</h2>
         <h2 v-if="teamCheck()">Advance To Trade</h2>
       </div>
-      <div v-if="teamCheck()" class="col-md-4 col-md-offset-4 linking">
+      <div v-if="teamCheck()" class="col-md-4 linking">
         <!-- <router-link :to="{ path: '/trade', params: { ${team1}${team2} } }"> -->
         <div @click="startTrade()" class="well well-sm link">
           <span class="glyphicon glyphicon-menu-right"></span>
@@ -23,21 +23,19 @@
     </div>
 
     <div v-if="!trading" class="row text-center top">
-      <div class="col-md-6 team">
+      <div class="col-md-4 col-md-offset-2 team">
         <h4>{{ team1 }}</h4>
-        <input v-model="query1" placeholder="Search for a team"><br><hr>
-        <img v-if="team1!== 'Select Team 1'" src="http://image.ibb.co/ishqqa/basketball_3.png" alt="basketball_3" border="0">
+        <input v-model="query1" placeholder="Search for a team"><br><br>
       </div>
 
-      <div class="col-md-6 team">
+      <div class="col-md-4 team">
         <h4>{{ team2 }}</h4>
-        <input v-model="query2" placeholder="Search for a team"><br><hr>
-        <img v-if="team2!== 'Select Team 2'" src="http://image.ibb.co/jczybF/basketball_2.png" alt="basketball_2" border="0">
+        <input v-model="query2" placeholder="Search for a team"><br><br>
       </div>
     </div>
 
     <div v-if="!trading" class="row">
-      <div class="col-md-6">
+      <div class="col-md-2 col-md-offset-2 text-left">
         <transition-group
           v-if="query1"
           name="staggered-fade"
@@ -57,7 +55,16 @@
         </transition-group>
       </div>
 
-      <div v-if="query2" class="col-md-6">
+      <div class="col-md-4 teams">
+        <div class="col-md-6">
+          <img v-if="team1!== 'Select Team 1'" src="http://image.ibb.co/ishqqa/basketball_3.png" alt="basketball_3">
+        </div>
+        <div class="col-md-6">
+          <img v-if="team2!== 'Select Team 2'" src="http://image.ibb.co/jczybF/basketball_2.png" alt="basketball_2">
+        </div>
+      </div>
+
+      <div v-if="query2" class="col-md-2 text-right">
         <transition-group
           name="staggered-fade"
           tag="ul"
@@ -72,40 +79,40 @@
             v-bind:data-index="index"
             @click="selectTeam('team2', team.teamName)"
             class="selection"
-          >{{ team.teamName }}</li>
+          >
+            {{ team.teamName }}
+          </li>
         </transition-group>
       </div>
     </div>
-    <hr v-if="!trading" class="orange">
 
     <Trade v-if="trading" :teamOne="team1" :teamTwo="team2"></Trade>
-    <hr class="orange">
-
-    <!-- <div v-if="teamCheck() && !trading" class="row text-center">
-      <div class="col-md-4 col-md-offset-4">
-        <router-link :to="{ path: '/trade', params: { ${team1}${team2} } }">
-        <div @click="startTrade()" class="well well-sm link">
-          <span class="glyphicon glyphicon-menu-right"></span>
-        </div>
-        </router-link>
-      </div>
-    </div> -->
 
     <div class="row">
-      <div v-if="trading" @click="trading = false" class="col-md-4 col-md-offset-1 text-center">
+      <div class="col-md-8 col-md-offset-2">
+        <hr v-if="!trading" class="orange">
+      </div>
+      <hr v-if="trading" class="orange">
+    </div>
+
+    <div v-if="trading" class="row">
+      <div @click="trading = false" class="col-md-4 col-md-offset-1 text-center linking">
         <div class="well well-sm link">
           <span class="glyphicon glyphicon-menu-left"></span>
         </div>
       </div>
+      <div class="col-md-4 navigation">
+        <h2>Re-Select Teams</h2>
+      </div>
     </div>
 
-    <!-- <small class="credits text-right">
-      <div>Icons made by <a href="http://www.flaticon.com/authors/popcorns-arts" title="Popcorns Arts">Popcorns Arts</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>
-      <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>
-      <div>Icons made by <a href="http://www.flaticon.com/authors/darius-dan" title="Darius Dan">Darius Dan</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>
-      <div>Icons made by <a href="http://www.flaticon.com/authors/nikita-golubev" title="Nikita Golubev">Nikita Golubev</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>
-      <div>Icons made by <a href="http://www.flaticon.com/authors/madebyoliver" title="Madebyoliver">Madebyoliver</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>
-    </small> -->
+    <small class="credits text-right">
+      <div>Icons made by <a href="http://www.flaticon.com/authors/popcorns-arts" title="Popcorns Arts">Popcorns Arts</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a></div>
+      <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a></div>
+      <div>Icons made by <a href="http://www.flaticon.com/authors/darius-dan" title="Darius Dan">Darius Dan</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a></div>
+      <div>Icons made by <a href="http://www.flaticon.com/authors/nikita-golubev" title="Nikita Golubev">Nikita Golubev</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a></div>
+      <div>Icons made by <a href="http://www.flaticon.com/authors/madebyoliver" title="Madebyoliver">Madebyoliver</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a></div>
+    </small>
   </div>
 </template>
 
@@ -132,13 +139,13 @@ import Trade from './Trade.vue';
       team1Select: function () {
         var vm = this
         return this.teams1.filter(function (team) {
-          return team.teamName.toLowerCase().indexOf(vm.query1.toLowerCase()) !== -1
+          return team.teamName.toLowerCase().indexOf(vm.query1.toLowerCase()) !== -1 && team.teamName !== vm.team2
         });
       },
       team2Select: function () {
         var vm = this
         return this.teams2.filter(function (team) {
-          return team.teamName.toLowerCase().indexOf(vm.query2.toLowerCase()) !== -1
+          return team.teamName.toLowerCase().indexOf(vm.query2.toLowerCase()) !== -1 && team.teamName !== vm.team1
         });
       }
     },
@@ -197,6 +204,10 @@ body {
   border-color: #ED8D1F;
 }
 
+h2 {
+  font-family: 'News Cycle', sans-serif;
+  margin-top: 0;
+}
 .navigation {
   font-family: 'News Cycle', sans-serif;
 }
@@ -215,39 +226,54 @@ body {
   color: #000;
 }
 
+.top {
+
+}
+
 input {
   padding: 5px;
   width: 100%;
   background-color: transparent;
   border-color: transparent;
-  border-radius: 6px 6px 8px 8px;
-  color: #00a2a5;
-  text-align: center;
-  /*border-color: #ED8D1F;*/
-  border-color: #00a2a5;
+  border-radius: 0px 0px 10px 0px;
+  font-size: 1.25em;
+  color: #C4CFD5;
+  border-bottom-color: #000;
+  transition: .3s ease-out;
+  border-bottom-color: #757575;
 }
-input:hover {
-}
+input:hover {}
 input:focus {
   outline: none;
+  border-bottom-color: #C4CFD5;
 }
 
 .team {
   padding: 15px;
-  border-top: 4px solid #00A2A5;
+  /*border-top: 4px solid #00A2A5;*/
   transition: .3s ease-out;
 }
 .team:hover {
   /*box-shadow: 0px 2px 4px #00a2a5;*/
 }
 
+ul {
+  padding-left: 0px;
+  overflow: scroll;
+  max-height: 400px;
+  /*flex-wrap: wrap;*/
+  /*display: flex;*/
+}
+
 li.selection {
-  /*border-bottom: 1px solid #00a2a5;*/
+  color: #C4CFD5;
+
   list-style: none;
+  border: 1px #C4CFD5;
 }
 li.selection:hover {
   cursor: pointer;
-  color: #00a2a5;
+  color: #f1f4ff;
 }
 
 .middle {
@@ -265,7 +291,7 @@ li.selection:hover {
   background-color: transparent;
   transition: .3s ease-out;
   font-family: 'Palanquin', sans-serif;
-  color: #ed8d1f;
+  color: #f1f4ff;
 }
 .well:hover {
   background-color: #ed8d1f;
