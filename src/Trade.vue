@@ -1,20 +1,19 @@
 <template>
   <div class="container">
     <div class="row text-center evaluation">
-      <div v-if="teamOneTrades.salary.net >= 0" class="col-md-4 gain">
+      <div v-if="teamOneTrades.salary.net >= 0" class="col-md-3 col-md-offset-2 text-center gain">
         {{ teamOne }}
         <br>+{{ beautify(teamOneTrades.salary.net) }}
+        <br v-if="!inTrade()"><br v-if="!inTrade()">
       </div>
-      <div v-if="teamOneTrades.salary.net < 0" class="col-md-4 loss">
+      <div v-if="teamOneTrades.salary.net < 0" class="col-md-3 col-md-offset-2 text-center loss">
         {{ teamOne }}
         <br>-{{ beautify(Math.abs(teamOneTrades.salary.net)) }}
+        <br v-if="!inTrade()"><br v-if="!inTrade()">
       </div>
 
-      <div v-if="!inTrade()" class="col-md-4">
-        <h2>Select Players to Trade</h2>
-      </div>
-
-      <div v-if="inTrade()" class="col-md-4">
+      <div v-if="!inTrade()" class="col-md-2"></div>
+      <div v-if="inTrade()" class="col-md-2">
         {{ tradeChecker() }}
         <div v-if="valid" class="valid">
           <div class="well well-sm confirm">
@@ -23,23 +22,23 @@
         </div>
         <div v-if="!valid" class="invalid">
           <div class="well well-sm loss">
-            {{ message }}
+            <span class="glyphicon glyphicon-remove-circle"></span>
           </div>
         </div>
       </div>
 
-      <div v-if="teamTwoTrades.salary.net >= 0" class="col-md-4 gain">
+      <div v-if="teamTwoTrades.salary.net >= 0" class="col-md-3 text-center gain">
         {{ teamTwo }}
         <br>+{{ beautify(teamTwoTrades.salary.net) }}
       </div>
-      <div v-if="teamTwoTrades.salary.net < 0" class="col-md-4 loss">
+      <div v-if="teamTwoTrades.salary.net < 0" class="col-md-3 text-center loss">
         {{ teamTwo }}
         <br>-{{ beautify(Math.abs(teamTwoTrades.salary.net)) }}
       </div>
     </div>
 
-    <div class="row text-center top">
-      <div class="col-md-6 team team-1">
+    <div class="row text-center">
+      <div class="col-md-5 col-md-offset-1 team team-1">
         <div class="col-md-6">
           <h4>{{ teamOne }}</h4><br>
           <img src="http://image.ibb.co/ishqqa/basketball_3.png" alt="basketball_3" border="0">
@@ -53,7 +52,7 @@
           </ul>
         </div>
       </div>
-      <div class="col-md-6 team team-2">
+      <div class="col-md-5 team team-2">
         <div class="col-md-6">
           <ul class="list-group">
             <li @click="tradePlayer(player)" v-for="(player, index) in team2Players" class="list-group-item player">
@@ -91,7 +90,7 @@
 
       <div class="col-md-6">
         <h3>{{ teamTwo }} Receive</h3>
-        <ul class="list-group">
+        <ul class="col-md-12 list-group">
           <li v-for="(player, i) in teamOneTrades.players" class="list-group-item traded team-2">
             <div class="row">
               <div class="col-md-6 name">
@@ -266,24 +265,27 @@ import players from './data/players'
 <style>
 .evaluation {
   font-family: 'News Cycle', sans-serif;
+  font-size: 1.25em;
 }
 
 .glyphicon-transfer {
   color: #63D297;
   transition: .3s ease-out;
 }
-.glyphicon-transfer:hover {
+/*.glyphicon-transfer:hover {
   transform: rotateY(360deg);
-}
+}*/
 
 .gain {
   color: #63D297;
+  /*padding: 0px;*/
 }
 .loss {
   color: #EE3017;
+  /*padding: 0px;*/
 }
 .well.loss {
-  border-color: #ed8d1f;
+  border: 1px solid #ed8d1f;
   cursor: wait;
 }
 .well.loss:hover {

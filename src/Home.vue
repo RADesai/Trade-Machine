@@ -226,10 +226,6 @@ h2 {
   color: #000;
 }
 
-.top {
-
-}
-
 input {
   padding: 5px;
   width: 100%;
@@ -272,6 +268,7 @@ li.selection {
   border: 1px #C4CFD5;
 }
 li.selection:hover {
+  text-decoration: underline;
   cursor: pointer;
   color: #f1f4ff;
 }
