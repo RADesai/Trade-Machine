@@ -70,8 +70,8 @@
         <ul class="list-group">
           <li v-for="(player, i) in teamTwoTrades.players" class="list-group-item traded team-1">
             <div class="row">
-              <div class="col-md-6">
-                <span class="name">{{ player.name }} - {{ player.position }}</span>
+              <div class="col-md-6 name">
+                <h4>{{ player.name }} - {{ player.position }}</h4>
               </div>
               <div class="col-md-6">
                 <span class="stats">PPG: 20.6 APG: 3.8 RPG: 8.2<br>SPG: 0.5 BPG: 1.3 FG%: 54.2</span>
@@ -86,8 +86,8 @@
         <ul class="list-group">
           <li v-for="(player, i) in teamOneTrades.players" class="list-group-item traded team-2">
             <div class="row">
-              <div class="col-md-6">
-                <span class="name">{{ player.name }} - {{ player.position }}</span>
+              <div class="col-md-6 name">
+                <h4>{{ player.name }} - {{ player.position }}</h4>
               </div>
               <div class="col-md-6">
                 <span class="stats">PPG: 22.5 APG: 6.6 RPG: 4.5<br>SPG: 1.8 BPG: 0.9 FG%: 51.7</span>
@@ -219,11 +219,6 @@ import players from './data/players'
   font-family: 'News Cycle', sans-serif;
 }
 
-/*.math {
-  border: 1px solid #ed8d1f;
-  border-radius: 2px 2px 4px 4px;
-}*/
-
 .glyphicon-transfer {
   color: #63D297;
   transition: .3s ease-out;
@@ -258,27 +253,34 @@ import players from './data/players'
 .invalid {
 
 }
-.stats {
-  color: #000;
-  transition: .3s ease-out;
-  /*border-color: #000;*/
-}
-.stats .blend {
-  border-color: #000;
-  transition: .3s ease-out;
-}
 
 .traded {
   background-color: transparent;
+  border-left: 2px solid #f1f4ff;
+  border-right: 2px solid #f1f4ff;
 }
 .traded:hover {
-  color: #ed8d1f;
+  /*background-color: #2f1c06;*/
+  border-left: 2px solid #ed8d1f;
+  border-right: 2px solid #ed8d1f;
 }
-.traded:hover .stats {
-  color: #ed8d1f;
+.traded.team-1:hover {
+  background-color: #002021;
 }
-.traded:hover .stats .blend {
-  border-color: #ed8d1f;
+.traded.team-2:hover {
+  background-color: #2f1115;
+}
+.name {
+  transition: .3s ease-out;
+}
+.traded:hover .name {
+  /*text-shadow: 1px 1px 1px #ed8d1f;*/
+}
+.list-group-item.traded {
+  transition: .3s ease-out;
+}
+.list-group-item.traded:hover .name {
+  transform: translateX(3px);
 }
 .team-1 {
   border-top: 2px solid #00A2A5;
