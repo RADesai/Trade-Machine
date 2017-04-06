@@ -68,7 +68,7 @@
       <div class="col-md-6">
         <h3>{{ teamOne }} Receive</h3>
         <ul class="list-group">
-          <li v-for="(player, i) in teamTwoTrades.players" class="list-group-item traded team-1">
+          <li @click="keepPlayer(player, i)" v-for="(player, i) in teamTwoTrades.players" class="list-group-item traded team-1">
             <div class="row">
               <div class="col-md-6 name">
                 <h4>{{ player.name }} - {{ player.position }}</h4>
@@ -84,7 +84,7 @@
       <div class="col-md-6">
         <h3>{{ teamTwo }} Receive</h3>
         <ul class="list-group">
-          <li v-for="(player, i) in teamOneTrades.players" class="list-group-item traded team-2">
+          <li @click="keepPlayer(player, i)" v-for="(player, i) in teamOneTrades.players" class="list-group-item traded team-2">
             <div class="row">
               <div class="col-md-6 name">
                 <h4>{{ player.name }} - {{ player.position }}</h4>
@@ -212,6 +212,38 @@ import players from './data/players'
         } else {
           low * 1.5 >= high ? this.valid = true : this.valid = false;
           // this.valid = low * 1.5 >= high;
+        }
+      },
+      keepPlayer: function(player, index) {
+        console.log('Keeping:', player.name);
+        if (player.teamName === this.teamOne) {
+          this.teamOneTrades.players.splice(index, 1); // Find and remove player from teamOneTrades
+          // this.disabled.push(player.name); Find and remove player from disabled
+          let keeping = null;
+          for (var i = 0; i < this.disabled.length; i++) {
+            let currentPlayer = this.disabled[i];
+            if (currentPlayer === player.name) {
+              keeping = i;
+            }
+          }
+          this.disabled.splice(keeping, 1);
+          this.teamOneTrades.salary.trading -= player.salary;
+          this.teamOneTrades.salary.net -= player.salary;
+          this.teamTwoTrades.salary.net += player.salary;
+        } else if (player.teamName === this.teamTwo) {
+          this.teamTwoTrades.players.splice(index, 1); // Find and remove player from teamOneTrades
+          // this.disabled.push(player.name); Find and remove player from disabled
+          let keeping = null;
+          for (var i = 0; i < this.disabled.length; i++) {
+            let currentPlayer = this.disabled[i];
+            if (currentPlayer === player.name) {
+              keeping = i;
+            }
+          }
+          this.disabled.splice(keeping, 1);
+          this.teamTwoTrades.salary.trading -= player.salary;
+          this.teamTwoTrades.salary.net -= player.salary;
+          this.teamOneTrades.salary.net += player.salary;
         }
       }
     }
