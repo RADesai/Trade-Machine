@@ -64,17 +64,20 @@
       </div>
     </div>
 
-    <div class="row">
+    <div v-if="teamTwoTrades.players.length > 0 || teamOneTrades.players.length > 0" class="row">
       <div class="col-md-6">
         <h3>{{ teamOne }} Receive</h3>
         <ul class="list-group">
-          <li @click="keepPlayer(player, i)" v-for="(player, i) in teamTwoTrades.players" class="list-group-item traded team-1">
+          <li v-for="(player, i) in teamTwoTrades.players" class="list-group-item traded team-1">
             <div class="row">
-              <div class="col-md-6 name">
+              <div class="col-md-5 name">
                 <h4>{{ player.name }} - {{ player.position }}</h4>
               </div>
               <div class="col-md-6">
                 <span class="stats">PPG: 20.6 APG: 3.8 RPG: 8.2<br>SPG: 0.5 BPG: 1.3 FG%: 54.2</span>
+              </div>
+              <div class="col-md-1">
+                <span @click="keepPlayer(player, i)" class="glyphicon glyphicon-minus"></span>
               </div>
             </div>
           </li>
@@ -84,13 +87,16 @@
       <div class="col-md-6">
         <h3>{{ teamTwo }} Receive</h3>
         <ul class="list-group">
-          <li @click="keepPlayer(player, i)" v-for="(player, i) in teamOneTrades.players" class="list-group-item traded team-2">
+          <li v-for="(player, i) in teamOneTrades.players" class="list-group-item traded team-2">
             <div class="row">
-              <div class="col-md-6 name">
+              <div class="col-md-5 name">
                 <h4>{{ player.name }} - {{ player.position }}</h4>
               </div>
               <div class="col-md-6">
                 <span class="stats">PPG: 22.5 APG: 6.6 RPG: 4.5<br>SPG: 1.8 BPG: 0.9 FG%: 51.7</span>
+              </div>
+              <div class="col-md-1">
+                <span @click="keepPlayer(player, i)" class="glyphicon glyphicon-minus"></span>
               </div>
             </div>
           </li>
@@ -217,8 +223,7 @@ import players from './data/players'
       keepPlayer: function(player, index) {
         console.log('Keeping:', player.name);
         if (player.teamName === this.teamOne) {
-          this.teamOneTrades.players.splice(index, 1); // Find and remove player from teamOneTrades
-          // this.disabled.push(player.name); Find and remove player from disabled
+          this.teamOneTrades.players.splice(index, 1); // Find and remove player from teamOneTrades and disabled
           let keeping = null;
           for (var i = 0; i < this.disabled.length; i++) {
             let currentPlayer = this.disabled[i];
@@ -231,8 +236,7 @@ import players from './data/players'
           this.teamOneTrades.salary.net -= player.salary;
           this.teamTwoTrades.salary.net += player.salary;
         } else if (player.teamName === this.teamTwo) {
-          this.teamTwoTrades.players.splice(index, 1); // Find and remove player from teamOneTrades
-          // this.disabled.push(player.name); Find and remove player from disabled
+          this.teamTwoTrades.players.splice(index, 1);
           let keeping = null;
           for (var i = 0; i < this.disabled.length; i++) {
             let currentPlayer = this.disabled[i];
@@ -260,7 +264,6 @@ import players from './data/players'
   transition: .3s ease-out;
 }
 .glyphicon-transfer:hover {
-  /*color: #000;*/
   transform: rotateY(360deg);
 }
 
@@ -286,9 +289,7 @@ import players from './data/players'
 .valid:hover {
   color: #63d297;
 }
-.invalid {
-
-}
+.invalid {}
 
 .traded {
   background-color: transparent;
@@ -296,7 +297,6 @@ import players from './data/players'
   border-right: 2px solid #f1f4ff;
 }
 .traded:hover {
-  /*background-color: #2f1c06;*/
   border-left: 2px solid #ed8d1f;
   border-right: 2px solid #ed8d1f;
 }
@@ -309,9 +309,7 @@ import players from './data/players'
 .name {
   transition: .3s ease-out;
 }
-.traded:hover .name {
-  /*text-shadow: 1px 1px 1px #ed8d1f;*/
-}
+.traded:hover .name {}
 .list-group-item.traded {
   transition: .3s ease-out;
 }
@@ -326,9 +324,6 @@ import players from './data/players'
   border-top: 2px solid #ef586b;
   transition: .3s ease-out;
 }
-.team-2:hover {
-  /*box-shadow: 0px 2px 4px #ef586b;*/
-}
 
 .list-group-item.player {
   padding: 5px;
@@ -337,7 +332,16 @@ import players from './data/players'
 }
 .list-group-item.player:hover {
   cursor: pointer;
-  background-color: #f1f4ff;
+  background-color: #C4CFD5;
   color: #000;
+}
+
+span.glyphicon-minus {
+  transition: .2s ease-out;
+  font-size: 1.4em;
+}
+span.glyphicon-minus:hover {
+  color: #EE3017;
+  cursor: pointer;
 }
 </style>

@@ -7,8 +7,19 @@
       </div>
     </div>
 
-    <div v-if="!trading" class="row">
-      <br><h3>Select Participating Teams</h3><br>
+
+    <div v-if="!trading" class="row text-center">
+      <div class="col-md-4 navigation">
+        <h2 v-if="!teamCheck()">Select Participating Teams</h2>
+        <h2 v-if="teamCheck()">Advance To Trade</h2>
+      </div>
+      <div v-if="teamCheck()" class="col-md-4 col-md-offset-4 linking">
+        <!-- <router-link :to="{ path: '/trade', params: { ${team1}${team2} } }"> -->
+        <div @click="startTrade()" class="well well-sm link">
+          <span class="glyphicon glyphicon-menu-right"></span>
+        </div>
+        <!-- </router-link> -->
+      </div>
     </div>
 
     <div v-if="!trading" class="row text-center top">
@@ -70,15 +81,15 @@
     <Trade v-if="trading" :teamOne="team1" :teamTwo="team2"></Trade>
     <hr class="orange">
 
-    <div v-if="teamCheck() && !trading" class="row text-center">
+    <!-- <div v-if="teamCheck() && !trading" class="row text-center">
       <div class="col-md-4 col-md-offset-4">
-        <!-- <router-link :to="{ path: '/trade', params: { ${team1}${team2} } }"> -->
+        <router-link :to="{ path: '/trade', params: { ${team1}${team2} } }">
         <div @click="startTrade()" class="well well-sm link">
           <span class="glyphicon glyphicon-menu-right"></span>
         </div>
-        <!-- </router-link> -->
+        </router-link>
       </div>
-    </div>
+    </div> -->
 
     <div class="row">
       <div v-if="trading" @click="trading = false" class="col-md-4 col-md-offset-1 text-center">
@@ -186,11 +197,26 @@ body {
   border-color: #ED8D1F;
 }
 
-.top {
-  /*background-color: #CAD3D8;*/
+.navigation {
+  font-family: 'News Cycle', sans-serif;
+}
+.navigation:hover ~ .linking .well {
+  border-color: #63D297;
+}
+.well .glyphicon-menu-right {
+  transition: .3s ease-out;
+}
+.navigation:hover ~ .linking .well .glyphicon-menu-right {
+  color: #63D297;
+  transform: translateX(25px);
+}
+
+.well:hover .glyphicon-menu-right {
+  color: #000;
 }
 
 input {
+  padding: 5px;
   width: 100%;
   background-color: transparent;
   border-color: transparent;
@@ -243,7 +269,6 @@ li.selection:hover {
 }
 .well:hover {
   background-color: #ed8d1f;
-  color: #000;
   cursor: pointer;
   border: 1px solid #ed8d1f;
 }
