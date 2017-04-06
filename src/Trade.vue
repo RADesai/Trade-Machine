@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="row text-center">
+    <div class="row text-center evaluation">
       <div v-if="teamOneTrades.salary.net >= 0" class="col-md-4 gain">
         {{ teamOne }}
         <br>+{{ beautify(teamOneTrades.salary.net) }}
@@ -35,33 +35,38 @@
 
     <div class="row text-center top">
       <div class="col-md-6 team team-1">
-        <h4>{{ teamOne }}</h4>
-      </div>
-
-      <div class="col-md-6 team team-2">
-        <h4>{{ teamTwo }}</h4>
-      </div>
-    </div>
-
-    <div class="row text-center top">
-      <div class="col-md-6">
-        <div @click="tradePlayer(player)" v-for="(player, index) in team1Players" class="player">
-          {{ player.name }} - {{ player.position }}<br>
-          {{ beautify(player.salary) }}
+        <div class="col-md-6">
+          <h4>{{ teamOne }}</h4><br>
+          <img src="http://image.ibb.co/ishqqa/basketball_3.png" alt="basketball_3" border="0">
+        </div>
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li @click="tradePlayer(player)" v-for="(player, index) in team1Players" class="list-group-item player">
+              {{ player.name }} - {{ player.position }}<br>
+              {{ beautify(player.salary) }}
+            </li>
+          </ul>
         </div>
       </div>
-
-      <div class="col-md-6">
-        <div @click="tradePlayer(player)" v-for="(player, index) in team2Players" class="player">
-          {{ player.name }} - {{ player. position }}<br>
-          {{ beautify(player.salary) }}
+      <div class="col-md-6 team team-2">
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li @click="tradePlayer(player)" v-for="(player, index) in team2Players" class="list-group-item player">
+              {{ player.name }} - {{ player.position }}<br>
+              {{ beautify(player.salary) }}
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <h4>{{ teamTwo }}</h4><br>
+          <img src="http://image.ibb.co/jczybF/basketball_2.png" alt="basketball_2" border="0">
         </div>
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-6">
-        <h3>{{ teamOne }} Receive:</h3>
+        <h3>{{ teamOne }} Receive</h3>
         <ul class="list-group">
           <li v-for="(player, i) in teamTwoTrades.players" class="list-group-item traded team-1">
             <div class="row">
@@ -74,20 +79,10 @@
             </div>
           </li>
         </ul>
-        <!-- <span v-for="(player, i) in teamTwoTrades.players" class="traded team-1">
-          <div class="col-md-6">
-            <h3>{{ player.name }} - {{ player.position }}</h3><hr class="orange">
-          </div>
-          <div class="col-md-6">
-            <div class="stats">
-              <h4>PPG: 22.5 APG: 6.6 RPG: 4.5 <br> <br>SPG: 1.8 BPG: 0.9 FG%: 51.7</h4>
-            </div>
-          </div>
-        </span> -->
       </div>
 
       <div class="col-md-6">
-        <h3>{{ teamTwo }} Receive:</h3>
+        <h3>{{ teamTwo }} Receive</h3>
         <ul class="list-group">
           <li v-for="(player, i) in teamOneTrades.players" class="list-group-item traded team-2">
             <div class="row">
@@ -209,7 +204,7 @@ import players from './data/players'
         console.log('high, low:', high, low);
         console.log("% Diff:", (high / low) * 100);
         if (low === 0 || high === 0) {
-          this.valid = false;
+          this.valid = null;
         } else {
           low * 1.5 >= high ? this.valid = true : this.valid = false;
           // this.valid = low * 1.5 >= high;
@@ -220,10 +215,14 @@ import players from './data/players'
 </script>
 
 <style>
-.math {
+.evaluation {
+  font-family: 'News Cycle', sans-serif;
+}
+
+/*.math {
   border: 1px solid #ed8d1f;
   border-radius: 2px 2px 4px 4px;
-}
+}*/
 
 .glyphicon-transfer {
   color: #63D297;
@@ -290,7 +289,17 @@ import players from './data/players'
   transition: .3s ease-out;
 }
 .team-2:hover {
-  /*box-shadow: 0px 2px 4px #00a2a5;*/
-  color: #ef586b;
+  /*box-shadow: 0px 2px 4px #ef586b;*/
+}
+
+.list-group-item.player {
+  padding: 5px;
+  background-color: transparent;
+  transition: .3s ease-out;
+}
+.list-group-item.player:hover {
+  cursor: pointer;
+  background-color: #f1f4ff;
+  color: #000;
 }
 </style>

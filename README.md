@@ -3,7 +3,7 @@ Simple Trade Machine built with Vue.js, Node.js & Express.js
 
 ## DEMO
 
-[Trade Machine](http://www.Trade-Machine.herokuapp.com)
+[Trade Machine](https://trade-machine.herokuapp.com/)
 
 ## Usage
 

@@ -14,12 +14,14 @@
     <div v-if="!trading" class="row text-center top">
       <div class="col-md-6 team">
         <h4>{{ team1 }}</h4>
-        <input v-model="query1" placeholder="Search for a team">
+        <input v-model="query1" placeholder="Search for a team"><br><hr>
+        <img v-if="team1!== 'Select Team 1'" src="http://image.ibb.co/ishqqa/basketball_3.png" alt="basketball_3" border="0">
       </div>
 
       <div class="col-md-6 team">
         <h4>{{ team2 }}</h4>
-        <input v-model="query2" placeholder="Search for a team">
+        <input v-model="query2" placeholder="Search for a team"><br><hr>
+        <img v-if="team2!== 'Select Team 2'" src="http://image.ibb.co/jczybF/basketball_2.png" alt="basketball_2" border="0">
       </div>
     </div>
 
@@ -86,12 +88,13 @@
       </div>
     </div>
 
-    <!-- <div class="credits">
-      <div>Icons made by <a href="http://www.flaticon.com/authors/popcorns-arts" title="Popcorns Arts">Popcorns Arts</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
-      <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
-      <div>Icons made by <a href="http://www.flaticon.com/authors/darius-dan" title="Darius Dan">Darius Dan</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
-      <div>Icons made by <a href="http://www.flaticon.com/authors/madebyoliver" title="Madebyoliver">Madebyoliver</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
-    </div> -->
+    <small class="credits text-right">
+      <div>Icons made by <a href="http://www.flaticon.com/authors/popcorns-arts" title="Popcorns Arts">Popcorns Arts</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>
+      <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>
+      <div>Icons made by <a href="http://www.flaticon.com/authors/darius-dan" title="Darius Dan">Darius Dan</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>
+      <div>Icons made by <a href="http://www.flaticon.com/authors/nikita-golubev" title="Nikita Golubev">Nikita Golubev</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>
+      <div>Icons made by <a href="http://www.flaticon.com/authors/madebyoliver" title="Madebyoliver">Madebyoliver</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>
+    </small>
   </div>
 </template>
 
@@ -177,7 +180,7 @@ body {
 }
 
 .heading {
-  font-family: 'Kanit', sans-serif;
+  font-family: 'News Cycle', sans-serif;
 }
 .orange {
   border-color: #ED8D1F;
@@ -210,7 +213,6 @@ input:focus {
 }
 .team:hover {
   /*box-shadow: 0px 2px 4px #00a2a5;*/
-  color: #00a2a5;
 }
 
 li.selection {
