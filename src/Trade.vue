@@ -1,12 +1,12 @@
 <template>
   <div class="container">
-    <div class="row text-center evaluation">
-      <div v-if="teamOneTrades.salary.net >= 0" class="col-md-3 col-md-offset-2 text-center gain">
+    <div v-if="!done" class="row text-center evaluation">
+      <div v-if="teamOneTrades.salary.net >= 0" class="col-md-3 col-md-offset-2 text-center gain team-1">
         {{ teamOne }}
         <br>+{{ beautify(teamOneTrades.salary.net) }}
         <br v-if="!inTrade()"><br v-if="!inTrade()">
       </div>
-      <div v-if="teamOneTrades.salary.net < 0" class="col-md-3 col-md-offset-2 text-center loss">
+      <div v-if="teamOneTrades.salary.net < 0" class="col-md-3 col-md-offset-2 text-center loss team-1">
         {{ teamOne }}
         <br>-{{ beautify(Math.abs(teamOneTrades.salary.net)) }}
         <br v-if="!inTrade()"><br v-if="!inTrade()">
@@ -16,7 +16,7 @@
       <div v-if="inTrade()" class="col-md-2">
         {{ tradeChecker() }}
         <div v-if="valid" class="valid">
-          <div class="well well-sm confirm">
+          <div @click="confirmTrade" class="well well-sm confirm">
             <span class="glyphicon glyphicon-transfer"></span>
           </div>
         </div>
@@ -27,13 +27,32 @@
         </div>
       </div>
 
-      <div v-if="teamTwoTrades.salary.net >= 0" class="col-md-3 text-center gain">
+      <div v-if="teamTwoTrades.salary.net >= 0" class="col-md-3 text-center gain team-2">
         {{ teamTwo }}
         <br>+{{ beautify(teamTwoTrades.salary.net) }}
       </div>
-      <div v-if="teamTwoTrades.salary.net < 0" class="col-md-3 text-center loss">
+      <div v-if="teamTwoTrades.salary.net < 0" class="col-md-3 text-center loss team-2">
         {{ teamTwo }}
         <br>-{{ beautify(Math.abs(teamTwoTrades.salary.net)) }}
+      </div>
+    </div>
+
+    <div v-if="done" class="row text-center results">
+      <div v-if="received.teamOneSalary >= 0" class="col-md-6 team-1">
+        <br>{{ teamOne }} Receive <span v-for="(player, i) in received.teamOne">{{ player.name }}, </span>
+          and clear up {{ beautify(received.teamOneSalary) }} in Cap Space!<br><br>
+      </div>
+      <div v-if="received.teamOneSalary < 0" class="col-md-6 team-1">
+        <br>{{ teamOne }} Receive <span v-for="(player, i) in received.teamOne">{{ player.name }}, </span>
+          and take on {{ beautify(Math.abs(received.teamOneSalary)) }} in Salary!<br><br>
+      </div>
+      <div v-if="received.teamTwoSalary >= 0" class="col-md-6 team-2">
+        <br>{{ teamTwo }} Receive <span v-for="(player, i) in received.teamTwo">{{ player.name }}, </span>
+        and clear up {{ beautify(received.teamTwoSalary) }} in Cap Space!<br><br>
+      </div>
+      <div v-if="received.teamTwoSalary < 0" class="col-md-6 team-2">
+        <br>{{ teamTwo }} Receive <span v-for="(player, i) in received.teamTwo">{{ player.name }}, </span>
+        and take on {{ beautify(Math.abs(received.teamTwoSalary)) }} in Salary!<br><br>
       </div>
     </div>
 
@@ -139,7 +158,14 @@ import players from './data/players'
         },
         disabled: [],
         valid: null,
-        message: 'Invalid Trade'
+        message: 'Invalid Trade',
+        received: {
+          'teamOne': [],
+          'teamOneSalary': 0,
+          'teamTwo': [],
+          'teamTwoSalary': 0
+        },
+        done: false
       }
     },
     computed: {
@@ -200,6 +226,11 @@ import players from './data/players'
         return `$${niceNum.reverse().join('')}`;
       },
       tradePlayer: function(player) {
+        this.done = false;
+        this.received.teamOne = [];
+        this.received.teamOneSalary = 0;
+        this.received.teamTwo = [];
+        this.received.teamTwoSalary = 0;
         console.log('Trading:', player.name);
         if (player.teamName === this.teamOne && this.disabled.indexOf(player.name) === -1) {
           this.teamOneTrades.players.push(player);
@@ -257,6 +288,32 @@ import players from './data/players'
           this.teamTwoTrades.salary.net -= player.salary;
           this.teamOneTrades.salary.net += player.salary;
         }
+      },
+      confirmTrade: function() {
+        for (var i = 0; i < this.teamOneTrades.players.length; i++) {
+          let currentPlayer = this.teamOneTrades.players[i];
+          console.log(`Trading: ${currentPlayer}`);
+          currentPlayer.teamName = this.teamTwo;
+          this.received.teamTwo.push(currentPlayer);
+          console.log(`${currentPlayer} now on ${this.teamTwo}`);
+        }
+        this.teamOneTrades.players = [];
+        for (var i = 0; i < this.teamTwoTrades.players.length; i++) {
+          let currentPlayer = this.teamTwoTrades.players[i];
+          console.log(`Trading: ${currentPlayer}`);
+          currentPlayer.teamName = this.teamOne;
+          this.received.teamOne.push(currentPlayer);
+          console.log(`${currentPlayer} now on ${this.teamOne}`);
+        }
+        this.teamTwoTrades.players = [];
+        this.teamOneTrades.salary.trading = 0;
+        this.received.teamOneSalary = this.teamOneTrades.salary.net;
+        this.teamOneTrades.salary.net = 0;
+        this.teamTwoTrades.salary.trading = 0;
+        this.received.teamTwoSalary = this.teamTwoTrades.salary.net;
+        this.teamTwoTrades.salary.net = 0;
+        this.disabled = [];
+        this.done = true;
       }
     }
   }
@@ -311,20 +368,19 @@ import players from './data/players'
 .valid:hover {
   color: #63d297;
 }
-.invalid {}
 
 .traded {
   background-color: transparent;
-  border-left: 2px solid #f1f4ff;
-  border-right: 2px solid #f1f4ff;
+  /*border-left: 2px solid #f1f4ff;
+  border-right: 2px solid #f1f4ff;*/
 }
 .traded.team-1, .traded.team-2 {
   border-radius: 0px;
 }
-.traded:hover {
+/*.traded:hover {
   border-left: 2px solid #ed8d1f;
   border-right: 2px solid #ed8d1f;
-}
+}*/
 .traded.team-1:hover {
   background-color: #002021;
 }
@@ -338,9 +394,10 @@ import players from './data/players'
 .list-group-item.traded {
   transition: .3s ease-out;
 }
-.list-group-item.traded:hover .name {
+/*.list-group-item.traded:hover .name {
   transform: translateX(3px);
-}
+}*/
+
 .team-1 {
   border-radius: 10px 0px 0px 0px;
   border-top: 2px solid #00A2A5;

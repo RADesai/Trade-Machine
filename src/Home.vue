@@ -1,43 +1,36 @@
 <template>
   <div class="container">
     <div class="row text-center heading">
-      <div class="col-md-8 col-md-offset-2">
+      <div class="col-md-2 col-md-offset-2 text-center">
+        <div v-if="trading" @click="trading = false" class="well well-sm link">
+          <span class="glyphicon glyphicon-menu-left"></span>
+        </div>
+      </div>
+      <div class="col-md-4 title">
         <h1>NBA Trade Machine</h1>
-        <hr class="orange">
+        <!-- <hr class="orange"> -->
       </div>
-    </div>
-
-
-    <div v-if="!trading" class="row text-center">
-      <div class="col-md-4 col-md-offset-2 navigation">
-        <h2 v-if="!teamCheck()">Select Participating Teams</h2>
-        <h2 v-if="teamCheck()">Advance To Trade</h2>
-      </div>
-      <div v-if="teamCheck()" class="col-md-4 linking">
-        <!-- <router-link :to="{ path: '/trade', params: { ${team1}${team2} } }"> -->
-        <div @click="startTrade()" class="well well-sm link">
+      <div v-if="!trading" class="col-md-4">
+        <div v-if="teamCheck()" @click="startTrade()" class="col-md-6 well well-sm link">
           <span class="glyphicon glyphicon-menu-right"></span>
         </div>
-        <!-- </router-link> -->
       </div>
     </div>
 
     <div v-if="!trading" class="row text-center top">
       <div class="col-md-4 col-md-offset-2 team">
-        <h4>{{ team1 }}</h4>
-        <input v-model="query1" placeholder="Search for a team"><br><br>
+        <input v-model="team1.query" placeholder="Search for a team"><br><br>
       </div>
 
       <div class="col-md-4 team">
-        <h4>{{ team2 }}</h4>
-        <input v-model="query2" placeholder="Search for a team"><br><br>
+        <input v-model="team2.query" placeholder="Search for a team"><br><br>
       </div>
     </div>
 
     <div v-if="!trading" class="row">
       <div class="col-md-2 col-md-offset-2 text-left">
         <transition-group
-          v-if="query1"
+          v-if="team1.query"
           name="staggered-fade"
           tag="ul"
           v-bind:css="false"
@@ -57,14 +50,14 @@
 
       <div class="col-md-4 teams">
         <div class="col-md-6">
-          <img v-if="team1!== 'Select Team 1'" src="http://image.ibb.co/ishqqa/basketball_3.png" alt="basketball_3">
+          <img v-if="team1.name!== 'Select Team 1'" src="http://image.ibb.co/ishqqa/basketball_3.png" alt="basketball_3">
         </div>
         <div class="col-md-6">
-          <img v-if="team2!== 'Select Team 2'" src="http://image.ibb.co/jczybF/basketball_2.png" alt="basketball_2">
+          <img v-if="team2.name!== 'Select Team 2'" src="http://image.ibb.co/jczybF/basketball_2.png" alt="basketball_2">
         </div>
       </div>
 
-      <div v-if="query2" class="col-md-2 text-right">
+      <div v-if="team2.query" class="col-md-2 text-right">
         <transition-group
           name="staggered-fade"
           tag="ul"
@@ -86,33 +79,22 @@
       </div>
     </div>
 
-    <Trade v-if="trading" :teamOne="team1" :teamTwo="team2"></Trade>
+    <Trade v-if="trading" :teamOne="team1.name" :teamTwo="team2.name"></Trade>
 
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-md-8 col-md-offset-2">
         <hr v-if="!trading" class="orange">
       </div>
       <hr v-if="trading" class="orange">
-    </div>
+    </div> -->
 
-    <div v-if="trading" class="row">
-      <div @click="trading = false" class="col-md-4 col-md-offset-1 text-center linking">
-        <div class="well well-sm link">
-          <span class="glyphicon glyphicon-menu-left"></span>
-        </div>
-      </div>
-      <div class="col-md-4 navigation">
-        <h2>Re-Select Teams</h2>
-      </div>
-    </div>
-
-    <small class="credits text-right">
+    <!-- <small class="credits text-right">
       <div>Icons made by <a href="http://www.flaticon.com/authors/popcorns-arts" title="Popcorns Arts">Popcorns Arts</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a></div>
       <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a></div>
       <div>Icons made by <a href="http://www.flaticon.com/authors/darius-dan" title="Darius Dan">Darius Dan</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a></div>
       <div>Icons made by <a href="http://www.flaticon.com/authors/nikita-golubev" title="Nikita Golubev">Nikita Golubev</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a></div>
       <div>Icons made by <a href="http://www.flaticon.com/authors/madebyoliver" title="Madebyoliver">Madebyoliver</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a></div>
-    </small>
+    </small> -->
   </div>
 </template>
 
@@ -126,10 +108,14 @@ import Trade from './Trade.vue';
     },
     data() {
       return {
-        team1: 'Select Team 1',
-        team2: 'Select Team 2',
-        query1: '',
-        query2: '',
+        team1: {
+          'name': 'Select Team 1',
+          'query': ''
+        },
+        team2: {
+          'name': 'Select Team 2',
+          'query': ''
+        },
         teams1: teams,
         teams2: teams,
         trading: false
@@ -139,19 +125,20 @@ import Trade from './Trade.vue';
       team1Select: function () {
         var vm = this
         return this.teams1.filter(function (team) {
-          return team.teamName.toLowerCase().indexOf(vm.query1.toLowerCase()) !== -1 && team.teamName !== vm.team2
+          return team.teamName.toLowerCase().indexOf(vm.team1.query.toLowerCase()) !== -1 && team.teamName !== vm.team2.name
         });
       },
       team2Select: function () {
         var vm = this
         return this.teams2.filter(function (team) {
-          return team.teamName.toLowerCase().indexOf(vm.query2.toLowerCase()) !== -1 && team.teamName !== vm.team1
+          return team.teamName.toLowerCase().indexOf(vm.team2.query.toLowerCase()) !== -1 && team.teamName !== vm.team1.name
         });
       }
     },
     methods: {
       selectTeam: function(team, selection) {
-        this[team] = selection;
+        this[team].name = selection;
+        this[team].query = selection;
       },
       beforeEnter: function (el) {
         el.style.opacity = 0
@@ -178,7 +165,7 @@ import Trade from './Trade.vue';
         }, delay)
       },
       teamCheck: function() {
-        if (this.team1 !== 'Select Team 1' && this.team2 !== 'Select Team 2') {
+        if (this.team1.name !== 'Select Team 1' && this.team2.name !== 'Select Team 2') {
           return true;
         }
         return false;
@@ -200,6 +187,13 @@ body {
 .heading {
   font-family: 'News Cycle', sans-serif;
 }
+.heading .well {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.title {
+
+}
 .orange {
   border-color: #ED8D1F;
 }
@@ -208,6 +202,9 @@ h2 {
   font-family: 'News Cycle', sans-serif;
   margin-top: 0;
 }
+
+
+
 .navigation {
   font-family: 'News Cycle', sans-serif;
 }
