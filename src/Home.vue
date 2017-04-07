@@ -8,7 +8,6 @@
       </div>
       <div class="col-md-4 title">
         <h1>NBA Trade Machine</h1>
-        <!-- <hr class="orange"> -->
       </div>
       <div v-if="!trading" class="col-md-4">
         <div v-if="teamCheck()" @click="startTrade()" class="col-md-6 well well-sm link">
@@ -80,13 +79,6 @@
     </div>
 
     <Trade v-if="trading" :teamOne="team1.name" :teamTwo="team2.name"></Trade>
-
-    <!-- <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <hr v-if="!trading" class="orange">
-      </div>
-      <hr v-if="trading" class="orange">
-    </div> -->
 
     <!-- <small class="credits text-right">
       <div>Icons made by <a href="http://www.flaticon.com/authors/popcorns-arts" title="Popcorns Arts">Popcorns Arts</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a></div>

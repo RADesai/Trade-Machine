@@ -17,15 +17,11 @@
       </div>
       <div v-if="inTrade()" class="col-md-2">
         {{ tradeChecker() }}
-        <div v-if="valid" class="valid">
-          <div @click="confirmTrade" class="well well-sm confirm">
-            <span class="glyphicon glyphicon-transfer"></span>
-          </div>
+        <div v-if="valid" @click="confirmTrade" class="well well-sm valid confirm">
+          <span class="glyphicon glyphicon-transfer"></span>
         </div>
-        <div v-if="!valid" class="invalid">
-          <div class="well well-sm loss">
-            <span class="glyphicon glyphicon-remove-circle"></span>
-          </div>
+        <div v-if="!valid" class="well well-sm invalid loss">
+          <span class="glyphicon glyphicon-remove-circle"></span>
         </div>
       </div>
 
@@ -36,25 +32,6 @@
       <div v-if="teamTwoTrades.salary.net < 0" class="col-md-3 text-center loss team-2">
         {{ teamTwo }}
         <br>-{{ beautify(Math.abs(teamTwoTrades.salary.net)) }}
-      </div>
-    </div>
-
-    <div v-if="done" class="row text-center results">
-      <div v-if="received.teamOneSalary >= 0" class="col-md-6 team-1">
-        <br>{{ teamOne }} Receive <span v-for="(player, i) in received.teamOne">{{ player.name }}, </span>
-          and clear up {{ beautify(received.teamOneSalary) }} in Cap Space!<br><br>
-      </div>
-      <div v-if="received.teamOneSalary < 0" class="col-md-6 team-1">
-        <br>{{ teamOne }} Receive <span v-for="(player, i) in received.teamOne">{{ player.name }}, </span>
-          and take on {{ beautify(Math.abs(received.teamOneSalary)) }} in Salary!<br><br>
-      </div>
-      <div v-if="received.teamTwoSalary >= 0" class="col-md-6 team-2">
-        <br>{{ teamTwo }} Receive <span v-for="(player, i) in received.teamTwo">{{ player.name }}, </span>
-        and clear up {{ beautify(received.teamTwoSalary) }} in Cap Space!<br><br>
-      </div>
-      <div v-if="received.teamTwoSalary < 0" class="col-md-6 team-2">
-        <br>{{ teamTwo }} Receive <span v-for="(player, i) in received.teamTwo">{{ player.name }}, </span>
-        and take on {{ beautify(Math.abs(received.teamTwoSalary)) }} in Salary!<br><br>
       </div>
     </div>
 
@@ -126,6 +103,31 @@
             </div>
           </li>
         </ul>
+      </div>
+    </div>
+
+    <div v-if="done" class="row text-center results">
+      <div class="col-md-6 text-right">
+        <br><h3>{{ teamOne }}</h3><hr class="gold">
+        <div v-if="received.teamOneSalary >= 0">
+          <span v-for="(player, index) in team1Players">{{ player.name }}<br></span>
+          <span class="gain">+{{ beautify(received.teamOneSalary) }}<br></span>
+        </div>
+        <div v-if="received.teamOneSalary < 0">
+          <span v-for="(player, index) in team1Players">{{ player.name }}<br></span>
+          <span class="loss">-{{ beautify(Math.abs(received.teamOneSalary)) }}<br></span>
+        </div>
+      </div>
+      <div class="col-md-6 text-left">
+        <br><h3>{{ teamTwo }}</h3><hr class="gold">
+        <div v-if="received.teamTwoSalary >= 0">
+          <span v-for="(player, index) in team2Players">{{ player.name }}<br></span>
+          <span class="gain">+{{ beautify(received.teamTwoSalary) }}<br></span>
+        </div>
+        <div v-if="received.teamTwoSalary < 0">
+          <span v-for="(player, index) in team2Players">{{ player.name }}<br></span>
+          <span class="loss">-{{ beautify(Math.abs(received.teamTwoSalary)) }}<br></span>
+        </div>
       </div>
     </div>
   </div>
@@ -333,6 +335,11 @@ import players from './data/players'
 
 .results {
   font-family: 'News Cycle', sans-serif;
+  color: #C4CFD5;
+}
+
+.gold {
+  border-color: #ffd877;
 }
 
 .glyphicon-transfer {
@@ -373,7 +380,7 @@ import players from './data/players'
 }
 .valid {
   color: #000;
-  transition: .3s ease-out;
+  transition: .2s ease-out;
 }
 .valid:hover {
   color: #63d297;
