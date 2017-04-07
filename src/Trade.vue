@@ -107,8 +107,12 @@
     </div>
 
     <div v-if="done" class="row text-center results">
-      <div class="col-md-6 text-right">
-        <br><h3>{{ teamOne }}</h3><hr class="gold">
+      <br>
+      <div class="col-md-3 text-left">
+        <h4>CAP SPACE: $724,946</h4>
+      </div>
+      <div class="col-md-3 text-right">
+        <h3>{{ teamOne }}</h3><hr class="gold">
         <div v-if="received.teamOneSalary >= 0">
           <span v-for="(player, index) in team1Players">{{ player.name }}<br></span>
           <span class="gain">+{{ beautify(received.teamOneSalary) }}<br></span>
@@ -118,8 +122,8 @@
           <span class="loss">-{{ beautify(Math.abs(received.teamOneSalary)) }}<br></span>
         </div>
       </div>
-      <div class="col-md-6 text-left">
-        <br><h3>{{ teamTwo }}</h3><hr class="gold">
+      <div class="col-md-3 text-left">
+        <h3>{{ teamTwo }}</h3><hr class="gold">
         <div v-if="received.teamTwoSalary >= 0">
           <span v-for="(player, index) in team2Players">{{ player.name }}<br></span>
           <span class="gain">+{{ beautify(received.teamTwoSalary) }}<br></span>
@@ -128,6 +132,9 @@
           <span v-for="(player, index) in team2Players">{{ player.name }}<br></span>
           <span class="loss">-{{ beautify(Math.abs(received.teamTwoSalary)) }}<br></span>
         </div>
+      </div>
+      <div class="col-md-3 text-right">
+        <h4>CAP SPACE: $2,978,536</h4>
       </div>
     </div>
   </div>
