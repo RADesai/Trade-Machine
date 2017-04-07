@@ -12,7 +12,9 @@
         <br v-if="!inTrade()"><br v-if="!inTrade()">
       </div>
 
-      <div v-if="!inTrade()" class="col-md-2"></div>
+      <div v-if="!inTrade()" class="col-md-2 court">
+        <img src="http://image.ibb.co/d3c5ak/basketball_court_1.png" alt="basketball_court_1" border="0">
+      </div>
       <div v-if="inTrade()" class="col-md-2">
         {{ tradeChecker() }}
         <div v-if="valid" class="valid">
@@ -88,7 +90,7 @@
     </div>
 
     <div v-if="teamTwoTrades.players.length > 0 || teamOneTrades.players.length > 0" class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 team-1">
         <h3>{{ teamOne }} Receive</h3>
         <ul class="list-group">
           <li v-for="(player, i) in teamTwoTrades.players" class="list-group-item traded team-1">
@@ -107,7 +109,7 @@
         </ul>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-6 team-2">
         <h3>{{ teamTwo }} Receive</h3>
         <ul class="col-md-12 list-group">
           <li v-for="(player, i) in teamOneTrades.players" class="list-group-item traded team-2">
@@ -323,6 +325,14 @@ import players from './data/players'
 .evaluation {
   font-family: 'News Cycle', sans-serif;
   font-size: 1.25em;
+}
+
+.court {
+  border-top: 2px solid #ed8d1f;
+}
+
+.results {
+  font-family: 'News Cycle', sans-serif;
 }
 
 .glyphicon-transfer {
