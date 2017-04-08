@@ -2,18 +2,18 @@
   <div class="container">
     <div v-if="!done" class="row text-center evaluation">
       <div v-if="teamOneTrades.salary.net >= 0" class="col-md-3 col-md-offset-2 text-center gain team-1">
-        {{ teamOne }}
+        {{ teamOne.name }}
         <br>+{{ beautify(teamOneTrades.salary.net) }}
         <br v-if="!inTrade()"><br v-if="!inTrade()">
       </div>
       <div v-if="teamOneTrades.salary.net < 0" class="col-md-3 col-md-offset-2 text-center loss team-1">
-        {{ teamOne }}
+        {{ teamOne.name }}
         <br>-{{ beautify(Math.abs(teamOneTrades.salary.net)) }}
         <br v-if="!inTrade()"><br v-if="!inTrade()">
       </div>
 
       <div v-if="!inTrade()" class="col-md-2 court">
-        <img src="http://image.ibb.co/d3c5ak/basketball_court_1.png" alt="basketball_court_1" border="0">
+        <img src="https://image.ibb.co/d3c5ak/basketball_court_1.png" alt="basketball_court_1" border="0">
       </div>
       <div v-if="inTrade()" class="col-md-2">
         {{ tradeChecker() }}
@@ -26,11 +26,11 @@
       </div>
 
       <div v-if="teamTwoTrades.salary.net >= 0" class="col-md-3 text-center gain team-2">
-        {{ teamTwo }}
+        {{ teamTwo.name }}
         <br>+{{ beautify(teamTwoTrades.salary.net) }}
       </div>
       <div v-if="teamTwoTrades.salary.net < 0" class="col-md-3 text-center loss team-2">
-        {{ teamTwo }}
+        {{ teamTwo.name }}
         <br>-{{ beautify(Math.abs(teamTwoTrades.salary.net)) }}
       </div>
     </div>
@@ -38,8 +38,7 @@
     <div class="row text-center">
       <div class="col-md-5 col-md-offset-1 team team-1">
         <div class="col-md-6">
-          <h4>{{ teamOne }}</h4><br>
-          <img src="http://image.ibb.co/ishqqa/basketball_3.png" alt="basketball_3" border="0">
+          <img :src="teamOne.logo">
         </div>
         <div class="col-md-6">
           <ul class="list-group">
@@ -60,15 +59,14 @@
           </ul>
         </div>
         <div class="col-md-6">
-          <h4>{{ teamTwo }}</h4><br>
-          <img src="http://image.ibb.co/jczybF/basketball_2.png" alt="basketball_2" border="0">
+          <img :src="teamTwo.logo">
         </div>
       </div>
     </div>
 
     <div v-if="teamTwoTrades.players.length > 0 || teamOneTrades.players.length > 0" class="row">
       <div class="col-md-6 team-1">
-        <h3>{{ teamOne }} Receive</h3>
+        <h3>{{ teamOne.name }} Receive</h3>
         <ul class="list-group">
           <li v-for="(player, i) in teamTwoTrades.players" class="list-group-item traded team-1">
             <div class="row">
@@ -87,7 +85,7 @@
       </div>
 
       <div class="col-md-6 team-2">
-        <h3>{{ teamTwo }} Receive</h3>
+        <h3>{{ teamTwo.name }} Receive</h3>
         <ul class="col-md-12 list-group">
           <li v-for="(player, i) in teamOneTrades.players" class="list-group-item traded team-2">
             <div class="row">
@@ -109,7 +107,7 @@
     <div v-if="done" class="row results">
       <br>
       <div class="col-md-6 text-right results-1">
-        <h3>{{ teamOne }}</h3><hr class="gold gold-1"><br>
+        <h3>{{ teamOne.name }}</h3><hr class="gold gold-1"><br>
         <div v-if="received.teamOneSalary >= 0">
           <span v-for="(player, index) in team1Players">{{ player.name }}<br></span>
           <span class="gain">+{{ beautify(received.teamOneSalary) }}<br></span>
@@ -122,7 +120,7 @@
       </div>
 
       <div class="col-md-6 text-left results-2">
-        <h3>{{ teamTwo }}</h3><hr class="gold gold-2"><br>
+        <h3>{{ teamTwo.name }}</h3><hr class="gold gold-2"><br>
         <div v-if="received.teamTwoSalary >= 0">
           <span v-for="(player, index) in team2Players">{{ player.name }}<br></span>
           <span class="gain">+{{ beautify(received.teamTwoSalary) }}<br></span>
@@ -180,13 +178,13 @@ import players from './data/players'
       team1Players: function () {
         var vm = this
         return this.players1.filter(function (player) {
-          return player.teamName === vm.teamOne;
+          return player.teamName === vm.teamOne.name;
         });
       },
       team2Players: function () {
         var vm = this
         return this.players2.filter(function (player) {
-          return player.teamName === vm.teamTwo;
+          return player.teamName === vm.teamTwo.name;
         });
       }
     },
@@ -239,27 +237,23 @@ import players from './data/players'
         this.received.teamOneSalary = 0;
         this.received.teamTwo = [];
         this.received.teamTwoSalary = 0;
-        console.log('Trading:', player.name);
-        if (player.teamName === this.teamOne && this.disabled.indexOf(player.name) === -1) {
+        if (player.teamName === this.teamOne.name && this.disabled.indexOf(player.name) === -1) {
           this.teamOneTrades.players.push(player);
           this.disabled.push(player.name);
           this.teamOneTrades.salary.trading += player.salary;
           this.teamOneTrades.salary.net += player.salary;
           this.teamTwoTrades.salary.net -= player.salary;
-        } else if (player.teamName === this.teamTwo && this.disabled.indexOf(player.name) === -1) {
+        } else if (player.teamName === this.teamTwo.name && this.disabled.indexOf(player.name) === -1) {
           this.teamTwoTrades.players.push(player)
           this.disabled.push(player.name);
           this.teamTwoTrades.salary.trading += player.salary;
           this.teamTwoTrades.salary.net += player.salary;
           this.teamOneTrades.salary.net -= player.salary;
         }
-        console.log('Already on a team:', player.name);
       },
       tradeChecker: function() {
         let low = Math.min(this.teamOneTrades.salary.trading, this.teamTwoTrades.salary.trading);
         let high = Math.max(this.teamOneTrades.salary.trading, this.teamTwoTrades.salary.trading);
-        console.log('high, low:', high, low);
-        console.log("% Diff:", (high / low) * 100);
         if (low === 0 || high === 0) {
           this.valid = null;
         } else {
@@ -268,8 +262,7 @@ import players from './data/players'
         }
       },
       keepPlayer: function(player, index) {
-        console.log('Keeping:', player.name);
-        if (player.teamName === this.teamOne) {
+        if (player.teamName === this.teamOne.name) {
           this.teamOneTrades.players.splice(index, 1); // Find and remove player from teamOneTrades and disabled
           let keeping = null;
           for (var i = 0; i < this.disabled.length; i++) {
@@ -282,7 +275,7 @@ import players from './data/players'
           this.teamOneTrades.salary.trading -= player.salary;
           this.teamOneTrades.salary.net -= player.salary;
           this.teamTwoTrades.salary.net += player.salary;
-        } else if (player.teamName === this.teamTwo) {
+        } else if (player.teamName === this.teamTwo.name) {
           this.teamTwoTrades.players.splice(index, 1);
           let keeping = null;
           for (var i = 0; i < this.disabled.length; i++) {
@@ -300,18 +293,14 @@ import players from './data/players'
       confirmTrade: function() {
         for (var i = 0; i < this.teamOneTrades.players.length; i++) {
           let currentPlayer = this.teamOneTrades.players[i];
-          console.log(`Trading: ${currentPlayer}`);
-          currentPlayer.teamName = this.teamTwo;
+          currentPlayer.teamName = this.teamTwo.name;
           this.received.teamTwo.push(currentPlayer);
-          console.log(`${currentPlayer} now on ${this.teamTwo}`);
         }
         this.teamOneTrades.players = [];
         for (var i = 0; i < this.teamTwoTrades.players.length; i++) {
           let currentPlayer = this.teamTwoTrades.players[i];
-          console.log(`Trading: ${currentPlayer}`);
-          currentPlayer.teamName = this.teamOne;
+          currentPlayer.teamName = this.teamOne.name;
           this.received.teamOne.push(currentPlayer);
-          console.log(`${currentPlayer} now on ${this.teamOne}`);
         }
         this.teamTwoTrades.players = [];
         this.teamOneTrades.salary.trading = 0;
@@ -343,16 +332,16 @@ import players from './data/players'
   transition: .3s ease-out;
 }
 
-.results-1:hover {
+/*.results-1:hover {
   box-shadow: 1px 1px 5px #00a2a5;
-}
+}*/
 .results-1:hover .gold {
   width: 45%;
   border-color: #00A2A5;
 }
-.results-2:hover {
+/*.results-2:hover {
   box-shadow: -1px 1px 5px #ef586b;
-}
+}*/
 .results-2:hover .gold {
   width: 45%;
   border-color: #ef586b;
@@ -366,9 +355,11 @@ import players from './data/players'
 }
 .gold-1 {
   float: right;
+  margin-right: 0px;
 }
 .gold-2 {
   float: left;
+  margin-left: 0px;
 }
 
 .glyphicon-transfer {
@@ -459,6 +450,10 @@ import players from './data/players'
   cursor: pointer;
   background-color: #C4CFD5;
   color: #000;
+}
+
+.team img {
+  width: 100%;
 }
 
 span.glyphicon-minus {

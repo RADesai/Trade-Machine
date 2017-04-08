@@ -41,7 +41,7 @@
             v-for="(team, index) in team1Select"
             v-bind:key="team.teamName"
             v-bind:data-index="index"
-            @click="selectTeam('team1', team.teamName)"
+            @click="selectTeam('team1', team)"
             class="selection"
           >{{ team.teamName }}</li>
         </transition-group>
@@ -49,10 +49,10 @@
 
       <div class="col-md-4 teams">
         <div class="col-md-6">
-          <img v-if="team1.name!== 'Select Team 1'" src="http://image.ibb.co/ishqqa/basketball_3.png" alt="basketball_3">
+          <img v-if="team1.name!== 'Select Team 1'" :src="team1.logo">
         </div>
         <div class="col-md-6">
-          <img v-if="team2.name!== 'Select Team 2'" src="http://image.ibb.co/jczybF/basketball_2.png" alt="basketball_2">
+          <img v-if="team2.name!== 'Select Team 2'" :src="team2.logo">
         </div>
       </div>
 
@@ -69,7 +69,7 @@
             v-for="(team, index) in team2Select"
             v-bind:key="team.teamName"
             v-bind:data-index="index"
-            @click="selectTeam('team2', team.teamName)"
+            @click="selectTeam('team2', team)"
             class="selection"
           >
             {{ team.teamName }}
@@ -78,7 +78,7 @@
       </div>
     </div>
 
-    <Trade v-if="trading" :teamOne="team1.name" :teamTwo="team2.name"></Trade>
+    <Trade v-if="trading" :teamOne="team1" :teamTwo="team2"></Trade>
 
     <!-- <small class="credits text-right">
       <div>Icons made by <a href="http://www.flaticon.com/authors/popcorns-arts" title="Popcorns Arts">Popcorns Arts</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a></div>
@@ -129,8 +129,9 @@ import Trade from './Trade.vue';
     },
     methods: {
       selectTeam: function(team, selection) {
-        this[team].name = selection;
-        this[team].query = selection;
+        this[team].name = selection.teamName;
+        this[team].logo = selection.logo;
+        this[team].query = selection.teamName;
       },
       beforeEnter: function (el) {
         el.style.opacity = 0
@@ -235,6 +236,10 @@ input:focus {
 .team {
   padding: 15px;
   transition: .3s ease-out;
+}
+
+.teams img {
+  width: 100%;
 }
 
 ul {
