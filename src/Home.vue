@@ -171,13 +171,14 @@ import Trade from './Trade.vue';
 
 <style>
 body {
-  color: #f1f4ff;
+  color: #C4CFD5;
   background-color: #000;
   font-family: 'Palanquin', sans-serif;
 }
 
 .heading {
   font-family: 'News Cycle', sans-serif;
+  color: #f1f4ff;
 }
 .heading .well {
   margin-top: 20px;
@@ -194,8 +195,6 @@ h2 {
   font-family: 'News Cycle', sans-serif;
   margin-top: 0;
 }
-
-
 
 .navigation {
   font-family: 'News Cycle', sans-serif;
@@ -235,19 +234,13 @@ input:focus {
 
 .team {
   padding: 15px;
-  /*border-top: 4px solid #00A2A5;*/
   transition: .3s ease-out;
-}
-.team:hover {
-  /*box-shadow: 0px 2px 4px #00a2a5;*/
 }
 
 ul {
   padding-left: 0px;
   overflow: scroll;
   max-height: 400px;
-  /*flex-wrap: wrap;*/
-  /*display: flex;*/
 }
 
 li.selection {
@@ -269,7 +262,6 @@ li.selection:hover {
   transition: .3s ease-out;
 }
 .middle:hover {
-  /*box-shadow: 0px 2px 4px #ef586b;*/
   color: #ef586b;
 }
 
@@ -277,7 +269,7 @@ li.selection:hover {
   background-color: transparent;
   transition: .3s ease-out;
   font-family: 'Palanquin', sans-serif;
-  color: #f1f4ff;
+  color: #C4CFD5;
 }
 .well:hover {
   background-color: #ed8d1f;

@@ -106,13 +106,10 @@
       </div>
     </div>
 
-    <div v-if="done" class="row text-center results">
+    <div v-if="done" class="row results">
       <br>
-      <div class="col-md-3 text-left">
-        <h4>CAP SPACE: $724,946</h4>
-      </div>
-      <div class="col-md-3 text-right">
-        <h3>{{ teamOne }}</h3><hr class="gold">
+      <div class="col-md-6 text-right results-1">
+        <h3>{{ teamOne }}</h3><hr class="gold gold-1"><br>
         <div v-if="received.teamOneSalary >= 0">
           <span v-for="(player, index) in team1Players">{{ player.name }}<br></span>
           <span class="gain">+{{ beautify(received.teamOneSalary) }}<br></span>
@@ -121,9 +118,11 @@
           <span v-for="(player, index) in team1Players">{{ player.name }}<br></span>
           <span class="loss">-{{ beautify(Math.abs(received.teamOneSalary)) }}<br></span>
         </div>
+        <br><h4>CAP SPACE: $724,946</h4>
       </div>
-      <div class="col-md-3 text-left">
-        <h3>{{ teamTwo }}</h3><hr class="gold">
+
+      <div class="col-md-6 text-left results-2">
+        <h3>{{ teamTwo }}</h3><hr class="gold gold-2"><br>
         <div v-if="received.teamTwoSalary >= 0">
           <span v-for="(player, index) in team2Players">{{ player.name }}<br></span>
           <span class="gain">+{{ beautify(received.teamTwoSalary) }}<br></span>
@@ -132,9 +131,7 @@
           <span v-for="(player, index) in team2Players">{{ player.name }}<br></span>
           <span class="loss">-{{ beautify(Math.abs(received.teamTwoSalary)) }}<br></span>
         </div>
-      </div>
-      <div class="col-md-3 text-right">
-        <h4>CAP SPACE: $2,978,536</h4>
+        <br><h4>CAP SPACE: $2,978,536</h4>
       </div>
     </div>
   </div>
@@ -336,34 +333,54 @@ import players from './data/players'
   font-size: 1.25em;
 }
 
-.court {
-  border-top: 2px solid #ed8d1f;
-}
-
 .results {
   font-family: 'News Cycle', sans-serif;
   color: #C4CFD5;
 }
 
+.results-1,
+.results-2 {
+  transition: .3s ease-out;
+}
+
+.results-1:hover {
+  box-shadow: 1px 1px 5px #00a2a5;
+}
+.results-1:hover .gold {
+  width: 45%;
+  border-color: #00A2A5;
+}
+.results-2:hover {
+  box-shadow: -1px 1px 5px #ef586b;
+}
+.results-2:hover .gold {
+  width: 45%;
+  border-color: #ef586b;
+}
+
 .gold {
   border-color: #ffd877;
+  width: 30%;
+  transition: .3s ease-out;
+  margin: 5px;
+}
+.gold-1 {
+  float: right;
+}
+.gold-2 {
+  float: left;
 }
 
 .glyphicon-transfer {
   color: #63D297;
   transition: .3s ease-out;
 }
-/*.glyphicon-transfer:hover {
-  transform: rotateY(360deg);
-}*/
 
 .gain {
   color: #63D297;
-  /*padding: 0px;*/
 }
 .loss {
   color: #EE3017;
-  /*padding: 0px;*/
 }
 .well.loss {
   border: 1px solid #ed8d1f;
@@ -395,22 +412,26 @@ import players from './data/players'
 
 .traded {
   background-color: transparent;
-  /*border-left: 2px solid #f1f4ff;
-  border-right: 2px solid #f1f4ff;*/
 }
-.traded.team-1, .traded.team-2 {
+.traded.team-1,
+.traded.team-2 {
   border-radius: 0px;
+  border-left: 2px solid #C4CFD5;
+  border-right: 2px solid #C4CFD5;
 }
-/*.traded:hover {
-  border-left: 2px solid #ed8d1f;
-  border-right: 2px solid #ed8d1f;
-}*/
+
 .traded.team-1:hover {
   background-color: #002021;
 }
 .traded.team-2:hover {
   background-color: #2f1115;
 }
+.traded.team-1:hover,
+.traded.team-2:hover {
+  border-left: 2px solid #ffd877;
+  border-right: 2px solid #ffd877;
+}
+
 .name {
   transition: .3s ease-out;
 }
@@ -418,24 +439,20 @@ import players from './data/players'
 .list-group-item.traded {
   transition: .3s ease-out;
 }
-/*.list-group-item.traded:hover .name {
-  transform: translateX(3px);
-}*/
 
 .team-1 {
   border-radius: 10px 0px 0px 0px;
-  border-top: 2px solid #00A2A5;
   transition: .3s ease-out;
 }
 .team-2 {
   border-radius: 0px 10px 0px 0px;
-  border-top: 2px solid #ef586b;
   transition: .3s ease-out;
 }
 
 .list-group-item.player {
   padding: 5px;
   background-color: transparent;
+  color: #C4CFD5;
   transition: .3s ease-out;
 }
 .list-group-item.player:hover {
