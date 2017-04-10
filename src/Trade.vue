@@ -428,16 +428,14 @@ import players from './data/players'
   border-right: 2px solid #C4CFD5;*/
 }
 
-.traded.team-1:hover {
-  background-color: #002021;
-}
-.traded.team-2:hover {
-  background-color: #2f1115;
-}
 .traded.team-1:hover,
 .traded.team-2:hover {
-  /*border-left: 2px solid #ffd877;
-  border-right: 2px solid #ffd877;*/
+  border-left: 1px solid #ffd877;
+  border-right: 1px solid #ffd877;
+}
+.traded.team-1:hover .name,
+.traded.team-2:hover  .name {
+  color: #ffd877;
 }
 
 .name {
