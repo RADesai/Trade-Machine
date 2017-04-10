@@ -106,7 +106,7 @@
 
     <div v-if="done" class="row results">
       <br>
-      <div class="col-md-6 text-right results-1">
+      <div class="col-md-4 col-md-offset-2 text-right results-1">
         <h3>{{ teamOne.name }}</h3><hr class="gold gold-1"><br>
         <div v-if="received.teamOneSalary >= 0">
           <span v-for="(player, index) in team1Players">{{ player.name }}<br></span>
@@ -119,7 +119,7 @@
         <br><h4>CAP SPACE: $724,946</h4>
       </div>
 
-      <div class="col-md-6 text-left results-2">
+      <div class="col-md-4 text-left results-2">
         <h3>{{ teamTwo.name }}</h3><hr class="gold gold-2"><br>
         <div v-if="received.teamTwoSalary >= 0">
           <span v-for="(player, index) in team2Players">{{ player.name }}<br></span>
@@ -321,7 +321,6 @@ import players from './data/players'
   font-family: 'News Cycle', sans-serif;
   font-size: 1.25em;
 }
-
 .results {
   font-family: 'News Cycle', sans-serif;
   color: #C4CFD5;
@@ -336,20 +335,28 @@ import players from './data/players'
   box-shadow: 1px 1px 5px #00a2a5;
 }*/
 .results-1:hover .gold {
-  width: 45%;
+  width: 70%;
   border-color: #00A2A5;
+  -moz-border-image: -moz-linear-gradient(left, #00A2A5 0%, #ffd877 100%);
+  -webkit-border-image: -webkit-linear-gradient(left, #00A2A5 0%, #ffd877 100%);
+  border-image: linear-gradient(to right, #00A2A5 0%, #ffd877 100%);
+  border-image-slice: 1;
 }
 /*.results-2:hover {
   box-shadow: -1px 1px 5px #ef586b;
 }*/
 .results-2:hover .gold {
-  width: 45%;
+  width: 70%;
   border-color: #ef586b;
+  -moz-border-image: -moz-linear-gradient(left, #ffd877 0%, #ef586b 100%);
+  -webkit-border-image: -webkit-linear-gradient(left, #ffd877 0%, #ef586b 100%);
+  border-image: linear-gradient(to right, #ffd877 0%, #ef586b 100%);
+  border-image-slice: 1;
 }
 
 .gold {
   border-color: #ffd877;
-  width: 30%;
+  width: 40%;
   transition: .3s ease-out;
   margin: 5px;
 }
@@ -407,8 +414,8 @@ import players from './data/players'
 .traded.team-1,
 .traded.team-2 {
   border-radius: 0px;
-  border-left: 2px solid #C4CFD5;
-  border-right: 2px solid #C4CFD5;
+  /*border-left: 2px solid #C4CFD5;
+  border-right: 2px solid #C4CFD5;*/
 }
 
 .traded.team-1:hover {
@@ -419,8 +426,8 @@ import players from './data/players'
 }
 .traded.team-1:hover,
 .traded.team-2:hover {
-  border-left: 2px solid #ffd877;
-  border-right: 2px solid #ffd877;
+  /*border-left: 2px solid #ffd877;
+  border-right: 2px solid #ffd877;*/
 }
 
 .name {

@@ -421,93 +421,93 @@ module.exports = [
   },
   {
     "teamName": "Washington Wizards",
-    "name": "Jacqueline Carroll",
+    "name": "Otto Porter",
     "salary": 4025524,
-    "position": "G"
+    "position": "F"
   },
   {
     "teamName": "Utah Jazz",
-    "name": "Stephanie Hunter",
+    "name": "Rudy Gobert",
     "salary": 2865435,
-    "position": "G"
+    "position": "C"
   },
   {
     "teamName": "Toronto Raptors",
-    "name": "Rose Vasquez",
+    "name": "Kyle Lowry",
     "salary": 6364212,
     "position": "G"
   },
   {
     "teamName": "San Antonio Spurs",
-    "name": "Dennis Flores",
+    "name": "Patty Mills",
     "salary": 7230179,
     "position": "G"
   },
   {
     "teamName": "Sacramento Kings",
-    "name": "Anna Greene",
+    "name": "Ty Lawson",
     "salary": 4932646,
     "position": "G"
   },
   {
     "teamName": "Portland Trail Blazers",
-    "name": "Ashley Willis",
+    "name": "Meyers Leonard",
     "salary": 6734890,
-    "position": "G"
+    "position": "C"
   },
   {
     "teamName": "Phoenix Suns",
-    "name": "Joyce Nichols",
+    "name": "Jared Dudley",
     "salary": 3548287,
     "position": "G"
   },
   {
     "teamName": "Philadelphia 76ers",
-    "name": "Wanda Mccoy",
+    "name": "Dario Saric",
     "salary": 7192949,
     "position": "G"
   },
   {
     "teamName": "Orlando Magic",
-    "name": "Harry Hart",
+    "name": "Jodie Meeks",
     "salary": 7573445,
     "position": "G"
   },
   {
     "teamName": "Oklahoma City Thunder",
-    "name": "Shirley Schmidt",
+    "name": "Taj Gibson",
     "salary": 7736675,
-    "position": "G"
+    "position": "F"
   },
   {
     "teamName": "New York Knicks",
-    "name": "Brandon Kelley",
-    "salary": 7349568,
+    "name": "Ron Baker",
+    "salary": 3749568,
     "position": "G"
   },
   {
     "teamName": "New Orleans Pelicans",
-    "name": "Doris Brown",
+    "name": "Jrue Holiday",
     "salary": 5966748,
     "position": "G"
   },
   {
     "teamName": "Minnesota Timberwolves",
-    "name": "Charles Lane",
+    "name": "Zach LaVine",
     "salary": 6408443,
-    "position": "G"
+    "position": "G/F"
   },
   {
     "teamName": "Milwaukee Bucks",
-    "name": "Betty Young",
+    "name": "Steve Novak",
     "salary": 8801768,
-    "position": "G"
+    "position": "F"
   },
   {
     "teamName": "Miami Heat",
-    "name": "Eugene Wallace",
+    "name": "Justice Winslow",
     "salary": 6417756,
-    "position": "G"
+    "position": "F"
   },
   {
     "teamName": "Memphis Grizzlies",
@@ -517,9 +517,9 @@ module.exports = [
   },
   {
     "teamName": "Los Angeles Lakers",
-    "name": "Jason Spencer",
+    "name": "Julius Randle",
     "salary": 5040446,
-    "position": "G"
+    "position": "F"
   },
   {
     "teamName": "Los Angeles Clippers",
@@ -529,21 +529,21 @@ module.exports = [
   },
   {
     "teamName": "Indiana Pacers",
-    "name": "Edward Woods",
+    "name": "Aaron Brooks",
     "salary": 6580135,
     "position": "G"
   },
   {
     "teamName": "Houston Rockets",
-    "name": "Harry Jackson",
+    "name": "Trevor Ariza",
     "salary": 6284734,
     "position": "F"
   },
   {
     "teamName": "Golden State Warriors",
-    "name": "Keith Garza",
+    "name": "JaVale McGee",
     "salary": 9617027,
-    "position": "F"
+    "position": "C"
   },
   {
     "teamName": "Detroit Pistons",
@@ -553,15 +553,15 @@ module.exports = [
   },
   {
     "teamName": "Denver Nuggets",
-    "name": "Jesse Nguyen",
+    "name": "Jessica Nguyen",
     "salary": 3039872,
     "position": "F"
   },
   {
     "teamName": "Dallas Mavericks",
-    "name": "Ryan Nichols",
+    "name": "Yogi Ferrell",
     "salary": 6249833,
-    "position": "F"
+    "position": "G"
   },
   {
     "teamName": "Cleveland Cavaliers",
@@ -577,21 +577,21 @@ module.exports = [
   },
   {
     "teamName": "Charlotte Hornets",
-    "name": "Willie Cole",
+    "name": "Cody Zeller",
     "salary": 6288192,
-    "position": "F"
+    "position": "C"
   },
   {
     "teamName": "Brooklyn Nets",
-    "name": "Juan Meyer",
+    "name": "Quincy Acy",
     "salary": 9345089,
     "position": "F"
   },
   {
     "teamName": "Boston Celtics",
-    "name": "Walter Henry",
+    "name": "Marcus Smart",
     "salary": 5665074,
-    "position": "F"
+    "position": "G"
   },
   {
     "teamName": "Atlanta Hawks",
@@ -601,33 +601,33 @@ module.exports = [
   },
   {
     "teamName": "Washington Wizards",
-    "name": "Kenneth Montgomery",
+    "name": "Trey Burke",
     "salary": 8898569,
-    "position": "C"
+    "position": "G"
   },
   {
     "teamName": "Utah Jazz",
-    "name": "Frank Foster",
+    "name": "Dante Exum",
     "salary": 5771352,
     "position": "C"
   },
   {
     "teamName": "Toronto Raptors",
-    "name": "Scott Gomez",
+    "name": "P.J. Tucker",
     "salary": 5855872,
     "position": "C"
   },
   {
     "teamName": "San Antonio Spurs",
-    "name": "Victor Simmons",
+    "name": "Manu Ginobili",
     "salary": 4534242,
-    "position": "C"
+    "position": "G"
   },
   {
     "teamName": "Sacramento Kings",
-    "name": "Jeffrey Romero",
+    "name": "Aaron Afflalo",
     "salary": 7077951,
-    "position": "C"
+    "position": "G"
   },
   {
     "teamName": "Portland Trail Blazers",
@@ -661,15 +661,15 @@ module.exports = [
   },
   {
     "teamName": "New York Knicks",
-    "name": "Stephen Little",
+    "name": "Sasha Vujacic",
     "salary": 1323760,
     "position": "G"
   },
   {
     "teamName": "New Orleans Pelicans",
-    "name": "Randy Thomas",
+    "name": "Omer Asik",
     "salary": 5393114,
-    "position": "G"
+    "position": "C"
   },
   {
     "teamName": "Minnesota Timberwolves",
@@ -691,7 +691,7 @@ module.exports = [
   },
   {
     "teamName": "Memphis Grizzlies",
-    "name": "Todd Riley",
+    "name": "Tony Allen",
     "salary": 1159755,
     "position": "G"
   },
@@ -703,13 +703,13 @@ module.exports = [
   },
   {
     "teamName": "Los Angeles Clippers",
-    "name": "Frances Willis",
+    "name": "Francine Willis",
     "salary": 4146927,
     "position": "G"
   },
   {
     "teamName": "Indiana Pacers",
-    "name": "Joe Fowler",
+    "name": "Monta Ellis",
     "salary": 2187307,
     "position": "G"
   },
@@ -721,9 +721,9 @@ module.exports = [
   },
   {
     "teamName": "Golden State Warriors",
-    "name": "Eric Howell",
+    "name": "Matt Barnes",
     "salary": 1418901,
-    "position": "G/F"
+    "position": "F"
   },
   {
     "teamName": "Detroit Pistons",
@@ -745,19 +745,19 @@ module.exports = [
   },
   {
     "teamName": "Cleveland Cavaliers",
-    "name": "Wayne Flores",
-    "salary": 5586687,
-    "position": "G/F"
+    "name": "Kyrie Irving",
+    "salary": 15726687,
+    "position": "G"
   },
   {
     "teamName": "Chicago Bulls",
-    "name": "George Nguyen",
+    "name": "Robin Lopez",
     "salary": 4307009,
-    "position": "G/F"
+    "position": "C"
   },
   {
     "teamName": "Charlotte Hornets",
-    "name": "Benjamin Nelson",
+    "name": "Jeremy Lamb",
     "salary": 4723310,
     "position": "G/F"
   },
@@ -769,15 +769,15 @@ module.exports = [
   },
   {
     "teamName": "Boston Celtics",
-    "name": "Scott Medina",
+    "name": "Al Horford",
     "salary": 8219821,
     "position": "C"
   },
   {
     "teamName": "Atlanta Hawks",
-    "name": "Peter Ray",
+    "name": "Gary Neal",
     "salary": 1530423,
-    "position": "C"
+    "position": "G"
   },
   {
     "teamName": "Washington Wizards",
@@ -811,7 +811,7 @@ module.exports = [
   },
   {
     "teamName": "Portland Trail Blazers",
-    "name": "Scott Montgomery",
+    "name": "Moe Harkless",
     "salary": 6441883,
     "position": "G/F"
   },
@@ -823,9 +823,9 @@ module.exports = [
   },
   {
     "teamName": "Philadelphia 76ers",
-    "name": "Jimmy Kennedy",
+    "name": "T.J. McConnell",
     "salary": 8796889,
-    "position": "G/F"
+    "position": "G"
   },
   {
     "teamName": "Orlando Magic",
@@ -835,7 +835,7 @@ module.exports = [
   },
   {
     "teamName": "Oklahoma City Thunder",
-    "name": "Frances Russell",
+    "name": "Victor Oladipo",
     "salary": 7157805,
     "position": "G/F"
   },
@@ -847,14 +847,14 @@ module.exports = [
   },
   {
     "teamName": "New Orleans Pelicans",
-    "name": "Matthew Burns",
+    "name": "Solomon Hill",
     "salary": 5411820,
     "position": "F"
   },
   {
     "teamName": "Minnesota Timberwolves",
-    "name": "Ronald Allen",
-    "salary": 5138141,
+    "name": "Andrew Wiggins",
+    "salary": 8938141,
     "position": "F"
   },
   {
@@ -883,9 +883,9 @@ module.exports = [
   },
   {
     "teamName": "Los Angeles Clippers",
-    "name": "William Hughes",
+    "name": "J.J. Redick",
     "salary": 4736269,
-    "position": "F"
+    "position": "G"
   },
   {
     "teamName": "Indiana Pacers",
@@ -895,13 +895,13 @@ module.exports = [
   },
   {
     "teamName": "Houston Rockets",
-    "name": "Charles Medina",
+    "name": "Lou Williams",
     "salary": 9951038,
-    "position": "F"
+    "position": "G"
   },
   {
     "teamName": "Golden State Warriors",
-    "name": "Ruby Peterson",
+    "name": "Kevin Durant",
     "salary": 10778056,
     "position": "F"
   },
@@ -913,27 +913,27 @@ module.exports = [
   },
   {
     "teamName": "Denver Nuggets",
-    "name": "Stephen Johnston",
+    "name": "Mike Miller",
     "salary": 8676411,
     "position": "F"
   },
   {
     "teamName": "Dallas Mavericks",
-    "name": "Terry Thompson",
+    "name": "Seth Curry",
     "salary": 1195751,
-    "position": "F"
+    "position": "G"
   },
   {
     "teamName": "Cleveland Cavaliers",
     "name": "Bonnie Welch",
     "salary": 1410773,
-    "position": "F"
+    "position": "G/F"
   },
   {
     "teamName": "Chicago Bulls",
     "name": "Kimberly Walker",
     "salary": 10014419,
-    "position": "F"
+    "position": "G/F"
   },
   {
     "teamName": "Charlotte Hornets",
@@ -943,20 +943,20 @@ module.exports = [
   },
   {
     "teamName": "Brooklyn Nets",
-    "name": "Henry Banks",
+    "name": "Randy Foye",
     "salary": 2776618,
-    "position": "G/F"
+    "position": "G"
   },
   {
     "teamName": "Boston Celtics",
-    "name": "Harry Perry",
-    "salary": 2145896,
-    "position": "G/F"
+    "name": "Avery Bradley",
+    "salary": 12145896,
+    "position": "G"
   },
   {
     "teamName": "Atlanta Hawks",
-    "name": "Earl Perry",
-    "salary": 1774698,
-    "position": "C"
+    "name": "Kent Bazemore",
+    "salary": 7974698,
+    "position": "G"
   }
 ]
