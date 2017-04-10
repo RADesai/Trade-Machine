@@ -106,29 +106,19 @@
 
     <div v-if="done" class="row results">
       <br>
-      <div class="col-md-4 col-md-offset-2 text-right results-1">
-        <h3>{{ teamOne.name }}</h3><hr class="gold gold-1"><br>
-        <div v-if="received.teamOneSalary >= 0">
-          <span v-for="(player, index) in team1Players">{{ player.name }}<br></span>
-          <span class="gain">+{{ beautify(received.teamOneSalary) }}<br></span>
-        </div>
-        <div v-if="received.teamOneSalary < 0">
-          <span v-for="(player, index) in team1Players">{{ player.name }}<br></span>
-          <span class="loss">-{{ beautify(Math.abs(received.teamOneSalary)) }}<br></span>
-        </div>
+      <div class="col-md-6 text-right results-1">
+        <h3 class="team-link">{{ teamOne.name }}</h3><hr class="gold gold-1"><br>
+        <span class="roster" v-for="(player, index) in team1Players">{{ player.name }}<br></span>
+        <span v-if="received.teamOneSalary >= 0" class="gain">+{{ beautify(received.teamOneSalary) }}<br></span>
+        <span v-if="received.teamOneSalary < 0" class="loss">-{{ beautify(Math.abs(received.teamOneSalary)) }}<br></span>
         <br><h4>CAP SPACE: $724,946</h4>
       </div>
 
-      <div class="col-md-4 text-left results-2">
-        <h3>{{ teamTwo.name }}</h3><hr class="gold gold-2"><br>
-        <div v-if="received.teamTwoSalary >= 0">
-          <span v-for="(player, index) in team2Players">{{ player.name }}<br></span>
-          <span class="gain">+{{ beautify(received.teamTwoSalary) }}<br></span>
-        </div>
-        <div v-if="received.teamTwoSalary < 0">
-          <span v-for="(player, index) in team2Players">{{ player.name }}<br></span>
-          <span class="loss">-{{ beautify(Math.abs(received.teamTwoSalary)) }}<br></span>
-        </div>
+      <div class="col-md-6 text-left results-2">
+        <h3 class="team-link">{{ teamTwo.name }}</h3><hr class="gold gold-2"><br>
+        <span class="roster" v-for="(player, index) in team2Players">{{ player.name }}<br></span>
+        <span v-if="received.teamTwoSalary >= 0" class="gain">+{{ beautify(received.teamTwoSalary) }}<br></span>
+        <span v-if="received.teamTwoSalary < 0" class="loss">-{{ beautify(Math.abs(received.teamTwoSalary)) }}<br></span>
         <br><h4>CAP SPACE: $2,978,536</h4>
       </div>
     </div>
@@ -326,37 +316,57 @@ import players from './data/players'
   color: #C4CFD5;
 }
 
+.team-link:hover {
+  cursor: pointer;
+  color: #f1f4ff;
+}
+
 .results-1,
 .results-2 {
+  border: 1px solid #000;
   transition: .3s ease-out;
 }
 
-/*.results-1:hover {
-  box-shadow: 1px 1px 5px #00a2a5;
-}*/
-.results-1:hover .gold {
-  width: 70%;
-  border-color: #00A2A5;
-  -moz-border-image: -moz-linear-gradient(left, #00A2A5 0%, #ffd877 100%);
-  -webkit-border-image: -webkit-linear-gradient(left, #00A2A5 0%, #ffd877 100%);
-  border-image: linear-gradient(to right, #00A2A5 0%, #ffd877 100%);
+.results-1 .gold {
+  width: 40%;
+  border-color: #C4CFD5;
+  -moz-border-image: -moz-linear-gradient(left, #ffd877 0%, #C4CFD5 100%);
+  -webkit-border-image: -webkit-linear-gradient(left, #ffd877 0%, #C4CFD5 100%);
+  border-image: linear-gradient(to right, #ffd877 0%, #C4CFD5 100%);
   border-image-slice: 1;
 }
-/*.results-2:hover {
-  box-shadow: -1px 1px 5px #ef586b;
-}*/
-.results-2:hover .gold {
-  width: 70%;
-  border-color: #ef586b;
-  -moz-border-image: -moz-linear-gradient(left, #ffd877 0%, #ef586b 100%);
-  -webkit-border-image: -webkit-linear-gradient(left, #ffd877 0%, #ef586b 100%);
-  border-image: linear-gradient(to right, #ffd877 0%, #ef586b 100%);
+.results-2 .gold {
+  width: 40%;
+  border-color: #C4CFD5;
+  -moz-border-image: -moz-linear-gradient(left, #C4CFD5 0%, #ffd877 100%);
+  -webkit-border-image: -webkit-linear-gradient(left, #C4CFD5 0%, #ffd877 100%);
+  border-image: linear-gradient(to right, #C4CFD5 0%, #ffd877 100%);
   border-image-slice: 1;
 }
 
+.results-1:hover {
+  -moz-border-image: -moz-linear-gradient(left, #ffd877 0%, #000 100%);
+  -webkit-border-image: -webkit-linear-gradient(left, #ffd877 0%, #000 100%);
+  border-image: linear-gradient(to right, #ffd877 0%, #000 100%);
+  border-image-slice: 1;
+}
+.results-2:hover {
+  -moz-border-image: -moz-linear-gradient(left, #000 0%, #C4CFD5 100%);
+  -webkit-border-image: -webkit-linear-gradient(left, #000 0%, #C4CFD5 100%);
+  border-image: linear-gradient(to right, #000 0%, #C4CFD5 100%);
+  border-image-slice: 1;
+}
+.roster {
+  transition: .3s ease-out;
+}
+.roster:hover {
+  color: #f1f4ff;
+  cursor: pointer;
+}
+
 .gold {
-  border-color: #ffd877;
-  width: 40%;
+  border-color: #C4CFD5;
+  width: 30%;
   transition: .3s ease-out;
   margin: 5px;
 }

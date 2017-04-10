@@ -9,7 +9,7 @@
               <span class="glyphicon glyphicon-menu-left"></span>
             </div>
           </div>
-          <div class="col-md-4 title">
+          <div class="col-md-4 title text-center">
             <h1>NBA Trade Machine</h1>
           </div>
           <div v-if="!trading" class="col-md-2 text-center">
@@ -262,7 +262,6 @@ input {
   width: 100%;
   background-color: transparent;
   border-color: transparent;
-  border-radius: 0px 0px 10px 0px;
   font-size: 1.25em;
   color: #C4CFD5;
   transition: .3s ease-out;
@@ -271,7 +270,7 @@ input {
 input:hover {}
 input:focus {
   outline: none;
-  border-bottom-color: #C4CFD5;
+  border-bottom-color: #F1f4FF;
 }
 
 .team {
