@@ -106,20 +106,48 @@
 
     <div v-if="done" class="row results">
       <br>
-      <div class="col-md-6 text-right results-1">
-        <h3 class="team-link">{{ teamOne.name }}</h3><hr class="gold gold-1"><br>
-        <span class="roster" v-for="(player, index) in team1Players">{{ player.name }}<br></span>
-        <span v-if="received.teamOneSalary >= 0" class="gain">+{{ beautify(received.teamOneSalary) }}<br></span>
-        <span v-if="received.teamOneSalary < 0" class="loss">-{{ beautify(Math.abs(received.teamOneSalary)) }}<br></span>
-        <br><h4>CAP SPACE: $724,946</h4>
+      <div class="col-md-6 results-1">
+        <div class="col-md-3 text-center playerProfile">
+          <div v-if="preview1.show">
+            <span class="glyphicon glyphicon-user"></span><br>
+            <h5>{{ preview1.name }}</h5>
+            <h6 v-for="(stat, index) in preview1.stats">{{ stat }}<br></h6>
+          </div>
+        </div>
+        <div class="col-md-3 text-center bank">
+          <!-- <span v-if="received.teamOneSalary >= 0" class="glyphicon glyphicon-piggy-bank gain"></span>
+          <span v-if="received.teamOneSalary < 0" class="glyphicon glyphicon-piggy-bank loss"></span> -->
+          <span class="glyphicon glyphicon-piggy-bank"></span>
+          <br><h5>CAP SPACE: $724,946</h5>
+        </div>
+        <div class="col-md-6 text-right">
+          <h3 class="team-link">{{ teamOne.name }}</h3><hr class="gold gold-1"><br>
+          <span @click="previewPlayer(player, 1)" class="roster" v-for="(player, index) in team1Players">{{ player.name }}<br></span>
+          <span v-if="received.teamOneSalary >= 0" class="gain">+{{ beautify(received.teamOneSalary) }}<br></span>
+          <span v-if="received.teamOneSalary < 0" class="loss">-{{ beautify(Math.abs(received.teamOneSalary)) }}<br></span>
+        </div>
       </div>
 
       <div class="col-md-6 text-left results-2">
-        <h3 class="team-link">{{ teamTwo.name }}</h3><hr class="gold gold-2"><br>
-        <span class="roster" v-for="(player, index) in team2Players">{{ player.name }}<br></span>
-        <span v-if="received.teamTwoSalary >= 0" class="gain">+{{ beautify(received.teamTwoSalary) }}<br></span>
-        <span v-if="received.teamTwoSalary < 0" class="loss">-{{ beautify(Math.abs(received.teamTwoSalary)) }}<br></span>
-        <br><h4>CAP SPACE: $2,978,536</h4>
+        <div class="col-md-6">
+          <h3 class="team-link">{{ teamTwo.name }}</h3><hr class="gold gold-2"><br>
+          <span @click="previewPlayer(player, 2)" class="roster" v-for="(player, index) in team2Players">{{ player.name }}<br></span>
+          <span v-if="received.teamTwoSalary >= 0" class="gain">+{{ beautify(received.teamTwoSalary) }}<br></span>
+          <span v-if="received.teamTwoSalary < 0" class="loss">-{{ beautify(Math.abs(received.teamTwoSalary)) }}<br></span>
+        </div>
+        <div class="col-md-3 text-center bank">
+          <!-- <span v-if="received.teamTwoSalary >= 0" class="glyphicon glyphicon-piggy-bank gain"></span>
+          <span v-if="received.teamTwoSalary < 0" class="glyphicon glyphicon-piggy-bank loss"></span> -->
+          <span class="glyphicon glyphicon-piggy-bank"></span>
+          <br><h5>CAP SPACE: $2,978,536</h5>
+        </div>
+        <div class="col-md-3 text-center playerProfile">
+          <div v-if="preview2.show">
+            <span class="glyphicon glyphicon-user"></span><br>
+            <h5>{{ preview2.name }}</h5>
+            <h6 v-for="(stat, index) in preview2.stats">{{ stat }}<br></h6>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -161,7 +189,17 @@ import players from './data/players'
           'teamTwo': [],
           'teamTwoSalary': 0
         },
-        done: false
+        done: false,
+        preview1: {
+          show: false,
+          name: '',
+          stats: []
+        },
+        preview2: {
+          show: false,
+          name: '',
+          stats: []
+        }
       }
     },
     computed: {
@@ -301,6 +339,20 @@ import players from './data/players'
         this.teamTwoTrades.salary.net = 0;
         this.disabled = [];
         this.done = true;
+      },
+      previewPlayer: function(player, team) {
+        let dummyStats = [
+          ['PPG: 27.2', 'RPG: 11.2', 'APG: 7.2', 'SPG: 1.4', 'BPG: 2.0'],
+          ['PPG: 14.6', 'RPG: 5.9', 'APG: 11.4', 'SPG: 2.1', 'BPG: 0.7'],
+          ['PPG: 11.6', 'RPG: 8.8', 'APG: 9.1', 'SPG: 2.3', 'BPG: 0.8'],
+          ['PPG: 18.1', 'RPG: 6.3', 'APG: 5.2', 'SPG: 0.7', 'BPG: 1.1'],
+          ['PPG: 19.3', 'RPG: 7.8', 'APG: 3.5', 'SPG: 1.1', 'BPG: 1.6'],
+          ['PPG: 31.2', 'RPG: 4.0', 'APG: 4.4', 'SPG: 1.3', 'BPG: 0.9']
+        ];
+        let rand = Math.floor(Math.random() * dummyStats.length);
+        team === 1 ? this.preview1.show = true : this.preview2.show = true;
+        team === 1 ? this.preview1.name = player.name : this.preview2.name = player.name;
+        team === 1 ? this.preview1.stats = dummyStats[rand] : this.preview2.stats = dummyStats[rand];
       }
     }
   }
@@ -327,8 +379,24 @@ import players from './data/players'
   transition: .3s ease-out;
 }
 
+.results-1 .playerProfile,
+.results-1 .bank,
+.results-2 .playerProfile,
+.results-2 .bank {
+  margin-top: 20px;
+  font-size: 1.6em;
+  transition: .3s ease-out;
+  color: #000;
+}
+.results-1:hover .playerProfile,
+.results-1:hover .bank,
+.results-2:hover .playerProfile,
+.results-2:hover .bank {
+  color: #C4CFD5;
+}
+
 .results-1 .gold {
-  width: 40%;
+  width: 65%;
   border-color: #C4CFD5;
   -moz-border-image: -moz-linear-gradient(left, #ffd877 0%, #C4CFD5 100%);
   -webkit-border-image: -webkit-linear-gradient(left, #ffd877 0%, #C4CFD5 100%);
@@ -336,7 +404,7 @@ import players from './data/players'
   border-image-slice: 1;
 }
 .results-2 .gold {
-  width: 40%;
+  width: 65%;
   border-color: #C4CFD5;
   -moz-border-image: -moz-linear-gradient(left, #C4CFD5 0%, #ffd877 100%);
   -webkit-border-image: -webkit-linear-gradient(left, #C4CFD5 0%, #ffd877 100%);
@@ -366,7 +434,7 @@ import players from './data/players'
 
 .gold {
   border-color: #C4CFD5;
-  width: 30%;
+  width: 50%;
   transition: .3s ease-out;
   margin: 5px;
 }
